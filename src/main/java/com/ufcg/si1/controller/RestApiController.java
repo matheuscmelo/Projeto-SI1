@@ -31,6 +31,7 @@ public class RestApiController {
 	/*
 	 * situação normal =0 situação extra =1
 	 */
+	private SituacaoPrefeitura situacaoPrefeitur = new SituacaoPrefeitura();
 	private IFSituacaoPrefeitura situacaoPrefeitura = new SituacaoNormal();
 
 	// -------------------Retrieve All
@@ -233,7 +234,7 @@ public class RestApiController {
 	@RequestMapping(value = "/geral/situacao", method = RequestMethod.GET)
 	public ResponseEntity<?> getSituacaoGeralQueixas() {
 
-		int situacao = situacaoPrefeitura.calculaSituacao(numeroQueixasAbertas(), queixaService.size());
+		int situacao = situacaoPrefeitur.calculaSituacao(numeroQueixasAbertas(), queixaService.size());
 
 		return new ResponseEntity<ObjWrapper<Integer>>(new ObjWrapper<Integer>(situacao), HttpStatus.OK);
 	}
