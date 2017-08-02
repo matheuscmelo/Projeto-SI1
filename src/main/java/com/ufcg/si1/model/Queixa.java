@@ -13,9 +13,10 @@ public class Queixa {
 
 	public int situacao; // usa variaveis estaticas abaixo
 	/* situacoes da queixa */
-	public static final int ABERTA = 1;
+	private SituacaoQueixa situacaoQueixa;
+	/*public static final int ABERTA = 1;
 	public static final int EM_ANDAMENTO = 2;
-	public static final int FECHADA = 3;
+	public static final int FECHADA = 3;*/
 
 	private String comentario = ""; // usado na atualizacao da queixa
 
@@ -54,16 +55,16 @@ public class Queixa {
 	}
 
 	public void abrir() throws ObjetoInvalidoException {
-		if (this.situacao != Queixa.EM_ANDAMENTO)
-			this.situacao = Queixa.ABERTA;
+		if (this.situacao != SituacaoQueixa.EM_ANDAMENTO.getSituacao())
+			this.situacao = SituacaoQueixa.ABERTA.getSituacao();
 		else
 			throw new ObjetoInvalidoException("Status inválido");
 	}
 
 	public void fechar(String coment) throws ObjetoInvalidoException {
-		if (this.situacao == Queixa.EM_ANDAMENTO
-				|| this.situacao == Queixa.ABERTA) {
-			this.situacao = Queixa.FECHADA;
+		if (this.situacao == SituacaoQueixa.EM_ANDAMENTO.getSituacao()
+				|| this.situacao == SituacaoQueixa.ABERTA.getSituacao()) {
+			this.situacao = SituacaoQueixa.FECHADA.getSituacao();
 			this.comentario = coment;
 		} else
 			throw new ObjetoInvalidoException("Status Inválido");
