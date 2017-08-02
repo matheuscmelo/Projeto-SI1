@@ -114,7 +114,7 @@ public class RestApiController {
 
 	@RequestMapping(value = "/queixa/fechamento", method = RequestMethod.POST)
 	public ResponseEntity<?> fecharQueixa(@RequestBody Queixa queixaAFechar) {
-		queixaAFechar.situacao = Queixa.FECHADA;
+		queixaAFechar.situacao = SituacaoQueixa.FECHADA.getSituacao();
 		queixaService.updateQueixa(queixaAFechar);
 		return new ResponseEntity<Queixa>(queixaAFechar, HttpStatus.OK);
 	}
@@ -255,7 +255,7 @@ public class RestApiController {
 		Iterator<Queixa> it = queixaService.getIterator();
 		for (Iterator<Queixa> it1 = it; it1.hasNext();) {
 			Queixa q = it1.next();
-			if (q.getSituacao() == Queixa.ABERTA)
+			if (q.getSituacao() == SituacaoQueixa.ABERTA.getSituacao())
 				contador++;
 		}
 
