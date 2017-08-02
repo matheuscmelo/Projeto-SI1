@@ -31,7 +31,7 @@ public class RestApiController {
     /* situação normal =0
        situação extra =1
      */
-    private SituacaoPrefeitura situacaoPrefeitura = new SituacaoNormal();
+    private IFSituacaoPrefeitura situacaoPrefeitura = new SituacaoNormal();
 
 
     // -------------------Retrieve All Complaints---------------------------------------------

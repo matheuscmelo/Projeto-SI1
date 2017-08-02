@@ -1,6 +1,6 @@
 package com.ufcg.si1.model;
 
-public class SituacaoNormal implements SituacaoPrefeitura {
+public class SituacaoNormal implements IFSituacaoPrefeitura {
 
 	@Override
 	public int calculaSituacao(int queixasAbertas, int queixasTotais) {

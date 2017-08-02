@@ -1,7 +1,15 @@
 package com.ufcg.si1.model;
 
-public interface SituacaoPrefeitura {
+public class SituacaoPrefeitura {
 	
-	public int calculaSituacao(int queixasAbertas, int queixasTotais);
+	IFSituacaoPrefeitura situacaoPrefeitura;
 	
+	public SituacaoPrefeitura() {
+		this.situacaoPrefeitura = new SituacaoNormal();
+	}
+	
+	public int changeSituation(int numeroQueixasAbertas, int numeroDeQueixas) {
+		return situacaoPrefeitura.calculaSituacao(numeroQueixasAbertas, numeroDeQueixas);
+	}
+
 }
