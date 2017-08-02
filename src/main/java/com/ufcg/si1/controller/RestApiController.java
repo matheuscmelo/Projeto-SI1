@@ -24,14 +24,14 @@ import java.util.List;
 @CrossOrigin
 public class RestApiController {
 
-    QueixaService queixaService = new QueixaServiceImpl();
-    EspecialidadeService especialidadeService = new EspecialidadeServiceImpl();
-    UnidadeSaudeService unidadeSaudeService = new UnidadeSaudeServiceImpl();
+    private QueixaService queixaService = new QueixaServiceImpl();
+    private EspecialidadeService especialidadeService = new EspecialidadeServiceImpl();
+    private UnidadeSaudeService unidadeSaudeService = new UnidadeSaudeServiceImpl();
 
     /* situação normal =0
        situação extra =1
      */
-    private int situacaoAtualPrefeitura = 0;
+    private SituacaoPrefeitura situacaoPrefeitura = new SituacaoNormal();
 
 
     // -------------------Retrieve All Complaints---------------------------------------------
@@ -237,34 +237,10 @@ public class RestApiController {
 
     @RequestMapping(value = "/geral/situacao", method = RequestMethod.GET)
     public ResponseEntity<?> getSituacaoGeralQueixas() {
-
-        // dependendo da situacao da prefeitura, o criterio de avaliacao muda
-        // se normal, mais de 20% abertas eh ruim, mais de 10 eh regular
-        // se extra, mais de 10% abertas eh ruim, mais de 5% eh regular
-        if (situacaoAtualPrefeitura == 0) {
-            if ((double) numeroQueixasAbertas() / queixaService.size() > 0.2) {
-                return new ResponseEntity<ObjWrapper<Integer>>(new ObjWrapper<Integer>(0), HttpStatus.OK);
-            } else {
-                if ((double) numeroQueixasAbertas() / queixaService.size() > 0.1) {
-                    return new ResponseEntity<ObjWrapper<Integer>>(new ObjWrapper<Integer>(1), HttpStatus.OK);
-                }
-            }
-        }
-        if (this.situacaoAtualPrefeitura == 1) {
-            if ((double) numeroQueixasAbertas() / queixaService.size() > 0.1) {
-                return new ResponseEntity<ObjWrapper<Integer>>(new ObjWrapper<Integer>(0), HttpStatus.OK);
-            } else {
-                if ((double) numeroQueixasAbertas() / queixaService.size() > 0.05) {
-                    return new ResponseEntity<ObjWrapper<Integer>>(new ObjWrapper<Integer>(1), HttpStatus.OK);
-                }
-            }
-        }
-
-        //situacao retornada
-        //0: RUIM
-        //1: REGULAR
-        //2: BOM
-        return new ResponseEntity<ObjWrapper<Integer>>(new ObjWrapper<Integer>(2), HttpStatus.OK);
+    	
+    	int situacao = situacaoPrefeitura.calculaSituacao(numeroQueixasAbertas(), queixaService.size());
+    	
+    	return new ResponseEntity<ObjWrapper<Integer>>(new ObjWrapper<Integer>(situacao), HttpStatus.OK);
     }
 
     @RequestMapping(value="/unidade/busca", method= RequestMethod.GET)
@@ -278,7 +254,7 @@ public class RestApiController {
         return new ResponseEntity<UnidadeSaude>((UnidadeSaude) us, HttpStatus.OK);
     }
 
-    private double numeroQueixasAbertas() {
+    private int numeroQueixasAbertas() {
         int contador = 0;
         Iterator<Queixa> it = queixaService.getIterator();
         for (Iterator<Queixa> it1 = it; it1.hasNext(); ) {
