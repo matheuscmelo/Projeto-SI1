@@ -1,20 +1,26 @@
 package com.ufcg.si1.model;
 
-public class Pessoa extends Endereco {
+public class Pessoa{
+	
+	
 	private String nome;
-
 	private String email;
-
-	public Pessoa(){
-		super();
-	}
-
+	private Endereco endereco;
+	
 
 	public Pessoa(String nome, String email, String rua, String uf,
 			String cidade) {
-		super(rua, uf, cidade);
 		this.nome = nome;
 		this.email = email;
+		this.endereco = new Endereco(rua, uf, cidade);
+	}
+
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
 	}
 
 	public String getNome() {
