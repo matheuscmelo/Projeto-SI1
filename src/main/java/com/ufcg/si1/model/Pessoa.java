@@ -39,4 +39,15 @@ public class Pessoa{
 		this.email = email;
 	}
 
+	public String getRua() {
+		return this.endereco.getRua();
+	}
+
+	public String getUf() {
+		return this.endereco.getUf();
+	}
+
+	public String getCidade() {
+		return this.endereco.getCidade();
+	}
 }
