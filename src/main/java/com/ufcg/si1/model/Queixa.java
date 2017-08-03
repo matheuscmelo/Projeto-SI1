@@ -1,10 +1,12 @@
 package com.ufcg.si1.model;
 
 import exceptions.ObjetoInvalidoException;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 
 public class Queixa {
-
+	@Autowired
 	private long id;
 
 	private String descricao;
