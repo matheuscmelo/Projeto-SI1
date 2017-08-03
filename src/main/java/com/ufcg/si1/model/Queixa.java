@@ -16,12 +16,12 @@ public class Queixa {
 	private String comentario = ""; // usado na atualizacao da queixa
 
 
-	public Queixa(long id, String descricao, SituacaoQueixa situacao, String comentario,
+	public Queixa(long id, String descricao, String comentario,
                   String nome, String email,
 				  String rua, String uf, String cidade) {
 		this.id = id;
 		this.descricao = descricao;
-		this.situacaoQueixa = situacao;
+		this.situacaoQueixa = SituacaoQueixa.ABERTA;
 		this.comentario = comentario;
 		this.solicitante = new Pessoa(nome, email, rua, uf, cidade);
 	}
@@ -50,13 +50,12 @@ public class Queixa {
 		this.situacaoQueixa = situacao;
 	}
 
-	public void abrir() throws ObjetoInvalidoException {
-		if (this.situacaoQueixa != SituacaoQueixa.EM_ANDAMENTO)
-			this.situacaoQueixa = SituacaoQueixa.ABERTA;
+	public void emAndamento() throws ObjetoInvalidoException {
+		if(this.situacaoQueixa == SituacaoQueixa.ABERTA)
+			this.setSituacao(SituacaoQueixa.EM_ANDAMENTO);
 		else
-			throw new ObjetoInvalidoException("Status inválido");
+			throw new ObjetoInvalidoException("Status Inválido");
 	}
-
 	public void fechar(String coment) throws ObjetoInvalidoException {
 		if (this.situacaoQueixa == SituacaoQueixa.EM_ANDAMENTO
 				|| this.situacaoQueixa == SituacaoQueixa.ABERTA) {
