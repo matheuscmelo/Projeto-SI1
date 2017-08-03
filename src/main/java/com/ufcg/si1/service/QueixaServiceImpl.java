@@ -28,10 +28,16 @@ public class QueixaServiceImpl implements QueixaService {
 
 	public void updateQueixa(Queixa queixa) {
 		if (queixas.contains(queixa)) {
-			queixa.setSituacao(SituacaoQueixa.FECHADA);
 			int index = queixas.indexOf(queixa);
 			queixas.set(index, queixa);
 		}
+	}
+	
+	public void fecharqueixa(Queixa queixa) {
+		queixa.setSituacao(SituacaoQueixa.FECHADA);
+	}
+	public void abrirQueixa(Queixa queixa) {
+		queixa.setSituacao(SituacaoQueixa.ABERTA);
 	}
 
 	public void deleteQueixaById(long id) {
