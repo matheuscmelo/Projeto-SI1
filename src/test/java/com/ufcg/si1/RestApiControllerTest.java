@@ -15,6 +15,9 @@ import com.ufcg.si1.model.Queixa;
 import com.ufcg.si1.model.UnidadeSaude;
 import com.ufcg.si1.util.CustomErrorType;
 
+import exceptions.ObjetoInexistenteException;
+import exceptions.Rep;
+
 public class RestApiControllerTest {
 		RestApiController controller; 
 		
@@ -35,11 +38,11 @@ public class RestApiControllerTest {
 			assertEquals(this.controller.numeroQueixasAbertas(), 0);
 		}
 		 @Test
-		public void testAdicaoEspecialidade() {
-			Especialidade e = new Especialidade("dá muito é o butão");
+		public void testAdicaoEspecialidade() throws Rep, ObjetoInexistenteException {
+			Especialidade e = new Especialidade("dá muito é o butão", 1);
 			this.controller.incluirEspecialidade(e);
 			assertEquals(this.controller.consultarEspecialidade(1),new ResponseEntity<Especialidade>(e, HttpStatus.OK));
-			Especialidade e1 = new Especialidade("fazer menes");
+			Especialidade e1 = new Especialidade("fazer menes", 2);
 			this.controller.incluirEspecialidade(e1);
 			assertEquals(this.controller.consultarEspecialidade(2),new ResponseEntity<Especialidade>(e1, HttpStatus.OK));
 			Especialidade e2 = new Especialidade("fazer menes");
