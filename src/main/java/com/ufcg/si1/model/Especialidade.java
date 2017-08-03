@@ -28,8 +28,8 @@ public class Especialidade {
 		return this.codigo;
 	}
 
-	public void setCodigo(int cod) {
-		this.codigo = cod;
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
 	}
 
 	@Override
