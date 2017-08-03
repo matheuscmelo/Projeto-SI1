@@ -12,6 +12,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import com.ufcg.si1.controller.RestApiController;
 import com.ufcg.si1.model.Especialidade;
 import com.ufcg.si1.model.Queixa;
+import com.ufcg.si1.model.SituacaoQueixa;
 import com.ufcg.si1.model.UnidadeSaude;
 import com.ufcg.si1.util.CustomErrorType;
 
@@ -29,7 +30,7 @@ public class RestApiControllerTest {
 		
 		@Test
 		public void testAdicaoQueixa() {
-			Queixa q = new Queixa(0, "ddd", 0, "fff", "wesley", "fff", "fff", "fff", "fff");
+			Queixa q = new Queixa(0, "ddd", SituacaoQueixa.ABERTA, "fff", "wesley", "fff", "fff", "fff", "fff");
 			assertTrue(this.controller.numeroQueixasAbertas() == 0);
 			this.controller.abrirQueixa(q);
 			assertTrue(this.controller.numeroQueixasAbertas() == 1);

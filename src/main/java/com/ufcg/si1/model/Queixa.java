@@ -10,26 +10,16 @@ public class Queixa {
 	private String descricao;
 
 	private Pessoa solicitante;
-
-	public int situacao; // usa variaveis estaticas abaixo
-	/* situacoes da queixa */
 	private SituacaoQueixa situacaoQueixa;
-	/*public static final int ABERTA = 1;
-	public static final int EM_ANDAMENTO = 2;
-	public static final int FECHADA = 3;*/
-
 	private String comentario = ""; // usado na atualizacao da queixa
 
-	public Queixa(){
-		id=0;
-	}
 
-	public Queixa(long id, String descricao, int situacao, String comentario,
+	public Queixa(long id, String descricao, SituacaoQueixa situacao, String comentario,
                   String nome, String email,
 				  String rua, String uf, String cidade) {
 		this.id = id;
 		this.descricao = descricao;
-		this.situacao = situacao;
+		this.situacaoQueixa = situacao;
 		this.comentario = comentario;
 		this.solicitante = new Pessoa(nome, email, rua, uf, cidade);
 	}
@@ -50,21 +40,25 @@ public class Queixa {
 		this.descricao = descricao;
 	}
 
-	public int getSituacao() {
-		return situacao;
+	public SituacaoQueixa getSituacao() {
+		return situacaoQueixa;
+	}
+	
+	public void setSituacao(SituacaoQueixa situacao) {
+		this.situacaoQueixa = situacao;
 	}
 
 	public void abrir() throws ObjetoInvalidoException {
-		if (this.situacao != SituacaoQueixa.EM_ANDAMENTO.getSituacao())
-			this.situacao = SituacaoQueixa.ABERTA.getSituacao();
+		if (this.situacaoQueixa != SituacaoQueixa.EM_ANDAMENTO)
+			this.situacaoQueixa = SituacaoQueixa.ABERTA;
 		else
 			throw new ObjetoInvalidoException("Status inválido");
 	}
 
 	public void fechar(String coment) throws ObjetoInvalidoException {
-		if (this.situacao == SituacaoQueixa.EM_ANDAMENTO.getSituacao()
-				|| this.situacao == SituacaoQueixa.ABERTA.getSituacao()) {
-			this.situacao = SituacaoQueixa.FECHADA.getSituacao();
+		if (this.situacaoQueixa == SituacaoQueixa.EM_ANDAMENTO
+				|| this.situacaoQueixa == SituacaoQueixa.ABERTA) {
+			this.situacaoQueixa = SituacaoQueixa.FECHADA;
 			this.comentario = coment;
 		} else
 			throw new ObjetoInvalidoException("Status Inválido");
