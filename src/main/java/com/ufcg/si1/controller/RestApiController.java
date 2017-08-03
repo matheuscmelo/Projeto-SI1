@@ -32,7 +32,7 @@ public class RestApiController {
 	/*
 	 * situação normal =0 situação extra =1
 	 */
-	private SituacaoPrefeitura situacaoPrefeitur = new SituacaoPrefeitura();
+	private SituacaoPrefeitura situacaoPrefeitura = new SituacaoPrefeitura();
 
 	// -------------------Retrieve All
 	// Complaints---------------------------------------------
@@ -52,15 +52,8 @@ public class RestApiController {
 	// Queixa-------------------------------------------
 
 	@RequestMapping(value = "/queixa/", method = RequestMethod.POST)
-	public ResponseEntity<?> abrirQueixa(@RequestBody Queixa queixa) {
-
-		try {
-			queixa.abrir();
-		} catch (ObjetoInvalidoException e) {
-			return new ResponseEntity<List>(HttpStatus.BAD_REQUEST);
-		}
+	public ResponseEntity<Queixa> abrirQueixa(@RequestBody Queixa queixa) {
 		queixaService.saveQueixa(queixa);
-
 		return new ResponseEntity<Queixa>(queixa, HttpStatus.CREATED);
 	}
 
@@ -208,7 +201,7 @@ public class RestApiController {
 	@RequestMapping(value = "/geral/situacao", method = RequestMethod.GET)
 	public ResponseEntity<?> getSituacaoGeralQueixas() {
 
-		int situacao = situacaoPrefeitur.calculaSituacao(numeroQueixasAbertas(), queixaService.size());
+		int situacao = situacaoPrefeitura.calculaSituacao(numeroQueixasAbertas(), queixaService.size());
 
 		return new ResponseEntity<ObjWrapper<Integer>>(new ObjWrapper<Integer>(situacao), HttpStatus.OK);
 	}

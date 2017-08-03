@@ -30,7 +30,7 @@ public class RestApiControllerTest {
 		
 		@Test
 		public void testAdicaoQueixa() {
-			Queixa q = new Queixa(0, "ddd", SituacaoQueixa.ABERTA, "fff", "wesley", "fff", "fff", "fff", "fff");
+			Queixa q = new Queixa(0, "ddd", "fff", "wesley", "fff", "fff", "fff", "fff");
 			assertTrue(this.controller.numeroQueixasAbertas() == 0);
 			this.controller.abrirQueixa(q);
 			assertTrue(this.controller.numeroQueixasAbertas() == 1);
