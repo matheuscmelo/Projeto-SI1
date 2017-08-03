@@ -16,14 +16,14 @@ public class QueixaServiceImpl implements QueixaService {
 
     private static final AtomicLong counter = new AtomicLong();
 
-    private static List<Queixa> queixas;
+    private static List<Queixa> queixas = new ArrayList<Queixa>();;
 
-    static {
+   /* static {
         queixas = populateDummyQueixas();
     }
 
     private static List<Queixa> populateDummyQueixas() {
-        List<Queixa> queixas = new ArrayList<Queixa>();
+        List<Queixa> queixas = 
 
         queixas.add(new Queixa(counter.incrementAndGet(), "Passei mal com uma coxinha",
         		SituacaoQueixa.FECHADA.getSituacao(), "", "Jose Silva",
@@ -44,7 +44,7 @@ public class QueixaServiceImpl implements QueixaService {
                 "Joao Pessoa"));
 
         return queixas;
-    }
+    }*/
 
     public List<Queixa> findAllQueixas() {
         return queixas;

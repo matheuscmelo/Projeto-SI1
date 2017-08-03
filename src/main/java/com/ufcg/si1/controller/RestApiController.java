@@ -52,7 +52,7 @@ public class RestApiController {
 	// Queixa-------------------------------------------
 
 	@RequestMapping(value = "/queixa/", method = RequestMethod.POST)
-	public ResponseEntity<?> abrirQueixa(@RequestBody Queixa queixa, UriComponentsBuilder ucBuilder) {
+	public ResponseEntity<?> abrirQueixa(@RequestBody Queixa queixa) {
 
 		// este codigo estava aqui, mas nao precisa mais
 		/*
@@ -75,7 +75,7 @@ public class RestApiController {
 	}
 
 	@RequestMapping(value = "/queixa/{id}", method = RequestMethod.GET)
-	public ResponseEntity<?> consultarQueixa(@PathVariable("id") long id) {
+	public ResponseEntity<Queixa> consultarQueixa(@PathVariable("id") long id) {
 
 		Queixa q = queixaService.findById(id);
 		if (q == null) {
@@ -152,7 +152,7 @@ public class RestApiController {
 	}
 
 	@RequestMapping(value = "/especialidade/", method = RequestMethod.POST)
-	public ResponseEntity<String> incluirEspecialidade(@RequestBody Especialidade esp, UriComponentsBuilder ucBuilder) {
+	public ResponseEntity<String> incluirEspecialidade(@RequestBody Especialidade esp/*, UriComponentsBuilder ucBuilder*/) {
 		try {
 			especialidadeService.insere(esp);
 		} catch (Rep e) {
@@ -162,20 +162,19 @@ public class RestApiController {
 		}
 
 		HttpHeaders headers = new HttpHeaders();
-		headers.setLocation(ucBuilder.path("/api/especialidade/{id}").buildAndExpand(esp.getCodigo()).toUri());
+		//headers.setLocation(ucBuilder.path("/api/especialidade/{id}").buildAndExpand(esp.getCodigo()).toUri());
 		return new ResponseEntity<String>(headers, HttpStatus.CREATED);
 	}
 
 	// how to save a subclass object?
 	@RequestMapping(value = "/unidade/", method = RequestMethod.POST)
-	public ResponseEntity<String> incluirUnidadeSaude(@RequestBody UnidadeSaude us, UriComponentsBuilder ucBuilder) {
+	public ResponseEntity<String> incluirUnidadeSaude(@RequestBody UnidadeSaude us/*, UriComponentsBuilder ucBuilder*/) {
 
 		try {
 			unidadeSaudeService.insere(us);
 		} catch (ObjetoJaExistenteException e) {
 			return new ResponseEntity<String>(HttpStatus.CONFLICT);
 		}
-
 		// HttpHeaders headers = new HttpHeaders();
 		// headers.setLocation(ucBuilder.path("/api/unidade/{id}").buildAndExpand(us.pegaCodigo()).toUri());
 		return new ResponseEntity<>(HttpStatus.CREATED);
@@ -238,7 +237,7 @@ public class RestApiController {
 		return new ResponseEntity<UnidadeSaude>( us, HttpStatus.OK);
 	}
 
-	private int numeroQueixasAbertas() {
+	public int numeroQueixasAbertas() {
 		int contador = 0;
 		Iterator<Queixa> it = queixaService.getIterator();
 		for (Iterator<Queixa> it1 = it; it1.hasNext();) {
