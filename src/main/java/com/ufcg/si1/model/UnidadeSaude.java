@@ -1,60 +1,96 @@
 package com.ufcg.si1.model;
 
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
-@JsonSubTypes({
-        @JsonSubTypes.Type(value = PostoSaude.class, name = "posto")
-})
+
 public class UnidadeSaude {
-    private int codigo;
+	@JsonProperty(value = "codigo")
+	private long codigo; // gerado no repositorio
+	@JsonProperty(value = "descricao")
+	private String descricao;
+	@JsonProperty(value = "especialidades")
+	private Set<Especialidade> especialidades;
+	@JsonProperty(value = "type")
+	private String tipo;
+	@JsonProperty(value = "numeroPacientesDia")
+	private int numeroPacientesDia;
+	@JsonProperty(value = "numeroMedicos")
+	private int numeroMedicos;
+	@JsonProperty(value = "bairro")
+	private String bairro;
 
-    private String descricao;
+	public UnidadeSaude(String descricao, int numeroPacientesDia, int numeroMedicos, String tipo, String bairro,
+			Set<Especialidade> especialidades) {
+		this.especialidades = new HashSet<>();
+		this.descricao = descricao;
+		this.numeroMedicos = numeroMedicos;
+		this.numeroPacientesDia = numeroPacientesDia;
+		this.tipo = tipo;
+		this.bairro = bairro;
+		this.especialidades = especialidades;
+	}
 
-    private List especialidades = new ArrayList();
+	public UnidadeSaude(String descricao, int numeroPacientesDia, int numeroMedicos, String tipo, String bairro) {
+		this(descricao, numeroPacientesDia, numeroMedicos, tipo, bairro, new HashSet<>());
+	}
 
-    private long [] numeroQueixas = new long[1000];
-    int contador = 0;
+	public long getCodigo() {
+		return codigo;
+	}
 
-    public UnidadeSaude(String descricao) {
-        this.codigo = 0; // gerado no repositorio
-        this.descricao = descricao;
-    }
-    public UnidadeSaude(){
-    }
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
+	}
 
-    public void addQueixaProxima(long id) {
-        if (this instanceof PostoSaude){
-            numeroQueixas[contador++] = id;
-        }
-    }
+	public String getDescricao() {
+		return descricao;
+	}
 
-    public String pegaDescricao() {
-        return this.descricao;
-    }
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
 
-    public void mudaDescricao(String descricao) {
-        this.descricao = descricao;
-    }
+	public String getTipo() {
+		return tipo;
+	}
 
-    public List<Especialidade> getEspecialidades() {
-        return this.especialidades;
-    }
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
 
-    public void adicionarEspecialidade(Especialidade esp) {
-        this.especialidades.add(esp);
-    }
+	public int getNumeroPacientesDia() {
+		return numeroPacientesDia;
+	}
 
-    public int pegaCodigo() {
-        return this.codigo;
-    }
+	public void setNumeroPacientesDia(int numeroPacientesDia) {
+		this.numeroPacientesDia = numeroPacientesDia;
+	}
 
-    public void mudaCodigo(int cod) {
-        this.codigo = cod;
-    }
+	public int getNumeroMedicos() {
+		return numeroMedicos;
+	}
+
+	public void setNumeroMedicos(int numeroMedicos) {
+		this.numeroMedicos = numeroMedicos;
+	}
+
+	public boolean adicionarEspecialidade(Especialidade especialidade) {
+		return this.especialidades.add(especialidade);
+	}
+
+	public String getBairro() {
+		return bairro;
+	}
+
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
+
+	public Object getEspecialidades() {
+		return especialidades;
+	}
 
 }
