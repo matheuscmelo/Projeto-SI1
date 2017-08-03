@@ -181,9 +181,9 @@ public class RestApiController {
 	}
 
 	@RequestMapping(value = "/especialidade/{id}", method = RequestMethod.GET)
-	public ResponseEntity<?> consultarEspecialidade(@PathVariable("id") long id) {
+	public ResponseEntity<?> consultarEspecialidade(@PathVariable("id") long id) throws Rep, ObjetoInexistenteException {
 
-		Especialidade q = especialidadeService.findById(id);
+		Especialidade q = especialidadeService.procura(id);
 		if (q == null) {
 			return new ResponseEntity(new CustomErrorType("Especialidade with id " + id + " not found"),
 					HttpStatus.NOT_FOUND);

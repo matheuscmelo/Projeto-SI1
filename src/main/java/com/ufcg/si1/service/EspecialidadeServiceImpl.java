@@ -7,102 +7,54 @@ import exceptions.Rep;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service("especialidadeService")
 public class EspecialidadeServiceImpl implements EspecialidadeService {
 
-    private Especialidade[] vetor;
-
-    private int indice;
-
-    private int geraCodigo = 0; // para gerar codigos
-
+    private Set<Especialidade> especialidades;
+    
     public EspecialidadeServiceImpl() {
-        vetor = new Especialidade[100];
-        indice = 0;
+        especialidades = new HashSet<Especialidade>();
     }
 
     @Override
-    public Especialidade procura(int codigo) throws Rep,
-            ObjetoInexistenteException {
+    public Especialidade procura(long codigo) throws Rep,
+    ObjetoInexistenteException {
 
-        int i = 0;
-
-        while (i < indice) {
-            if (vetor[i].getCodigo() == codigo) {
-                return vetor[i];
-            }
-
-            i++;
-        }
-
-        throw new ObjetoInexistenteException("Erro Especialidade");
-    }
-
-    @Override
-    public List getListaEspecialidade()
-            throws Rep, ObjetoInexistenteException {
-        return Arrays.asList(vetor);
-    }
-
-    @Override
-    public int size() {
-        return this.indice;
-    }
-
-    @Override
-    public Especialidade getElemento(int posicao) {
-        if (posicao < indice)
-            return this.vetor[posicao];
-        else
-            return null;
-    }
-
-    @Override
-    public void insere(Especialidade esp) throws Rep,
-            ObjetoJaExistenteException {
-
-        esp.setCodigo(++geraCodigo);
-
-        if (indice == this.vetor.length) {
-            throw new Rep("Erro ao incluir no array");
-        }
-
-        if (this.existe(esp.getCodigo())) {
-            throw new ObjetoJaExistenteException("Objeto jah existe no array");
-        }
-
-        this.vetor[indice] = esp;
-        indice++;
-    }
-
-    @Override
-    public boolean existe(int codigo) {
-
-        int indiceAux = 0;
-        boolean existe = false;
-
-        for (int i = 0; i < indice; i++) {
-            if (this.vetor[i].getCodigo() == codigo) {
-                indiceAux = i;
-                existe = true;
-
-                break;
-            }
-        }
-
-        return existe;
-    }
-
-    public Especialidade findById(long id) {
-        for (Especialidade esp: vetor) {
-            if (esp.getCodigo() == id) {
-                return esp;
-            }
+        for (Especialidade esp : especialidades) {
+        	if (esp.getCodigo() == codigo) 
+        		return esp;
         }
         return null;
     }
 
+    @Override
+    public List getEspecialidades() {
+        return Arrays.asList(especialidades);
+    }
 
+    @Override
+    public int size() {
+        return especialidades.size();
+    }
+
+    @Override
+    public void insere(Especialidade esp) throws Rep,
+    ObjetoJaExistenteException {
+        this.especialidades.add(esp);
+    }
+
+    @Override
+    public boolean existe(long codigo) {
+    	boolean existeEsp = false;
+    	for (Especialidade esp : especialidades) {
+        	if (esp.getCodigo() == codigo) 
+        		existeEsp = true;
+        }
+    	
+    	return existeEsp;
+    }
 }
