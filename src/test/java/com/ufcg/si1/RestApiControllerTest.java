@@ -48,9 +48,10 @@ public class RestApiControllerTest {
 		 
 		@Test
 		public void testUS() {
-			UnidadeSaude us = new UnidadeSaude("lugar de dá o botão");
+			UnidadeSaude us = new UnidadeSaude("lugar de dá a bunda", 24, 4, "Hospital", "zepa");
+			us.setCodigo(0);
 			this.controller.incluirUnidadeSaude(us);
-			assertEquals(this.controller.consultarUnidadeSaude(1), new ResponseEntity<>(us, HttpStatus.OK));
+			assertEquals(this.controller.consultarUnidadeSaude(0), new ResponseEntity<>(us, HttpStatus.OK));
 			assertEquals(this.controller.consultarUnidadeSaude(2), new ResponseEntity(new CustomErrorType("Unidade with id " + 2 + " not found"), HttpStatus.NOT_FOUND));
 		}
 }
