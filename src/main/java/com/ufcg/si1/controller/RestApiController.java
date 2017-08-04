@@ -68,7 +68,7 @@ public class RestApiController {
 	}
 
 	@RequestMapping(value = "/queixa/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<?> updateQueixa(@PathVariable("id") long id, @RequestBody Queixa queixa) {
+	public ResponseEntity<?> updateQueixa(@PathVariable("id") long id, @RequestBody Queixa queixa) throws ObjetoInvalidoException {
 
 		Queixa currentQueixa = queixaService.findById(id);
 
@@ -97,7 +97,7 @@ public class RestApiController {
 	}
 
 	@RequestMapping(value = "/queixa/fechamento", method = RequestMethod.POST)
-	public ResponseEntity<?> fecharQueixa(@RequestBody Queixa queixaAFechar) {
+	public ResponseEntity<?> fecharQueixa(@RequestBody Queixa queixaAFechar) throws ObjetoInvalidoException {
 		queixaService.updateQueixa(queixaAFechar);
 		return new ResponseEntity<Queixa>(queixaAFechar, HttpStatus.OK);
 	}
@@ -134,7 +134,8 @@ public class RestApiController {
 	}
 
 	@RequestMapping(value = "/especialidade/", method = RequestMethod.POST)
-	public ResponseEntity<String> incluirEspecialidade(@RequestBody Especialidade esp/*, UriComponentsBuilder ucBuilder*/) {
+	public ResponseEntity<String> incluirEspecialidade(
+			@RequestBody Especialidade esp/* , UriComponentsBuilder ucBuilder */) {
 		try {
 			especialidadeService.insere(esp);
 		} catch (Rep e) {
@@ -144,13 +145,14 @@ public class RestApiController {
 		}
 
 		HttpHeaders headers = new HttpHeaders();
-		//headers.setLocation(ucBuilder.path("/api/especialidade/{id}").buildAndExpand(esp.getCodigo()).toUri());
+		// headers.setLocation(ucBuilder.path("/api/especialidade/{id}").buildAndExpand(esp.getCodigo()).toUri());
 		return new ResponseEntity<String>(headers, HttpStatus.CREATED);
 	}
 
 	// how to save a subclass object?
 	@RequestMapping(value = "/unidade/", method = RequestMethod.POST)
-	public ResponseEntity<String> incluirUnidadeSaude(@RequestBody UnidadeSaude us/*, UriComponentsBuilder ucBuilder*/) {
+	public ResponseEntity<String> incluirUnidadeSaude(
+			@RequestBody UnidadeSaude us/* , UriComponentsBuilder ucBuilder */) {
 
 		try {
 			unidadeSaudeService.insere(us);
@@ -163,7 +165,8 @@ public class RestApiController {
 	}
 
 	@RequestMapping(value = "/especialidade/{id}", method = RequestMethod.GET)
-	public ResponseEntity<?> consultarEspecialidade(@PathVariable("id") long id) throws Rep, ObjetoInexistenteException {
+	public ResponseEntity<?> consultarEspecialidade(@PathVariable("id") long id)
+			throws Rep, ObjetoInexistenteException {
 
 		Especialidade q = especialidadeService.procura(id);
 		if (q == null) {
@@ -216,7 +219,7 @@ public class RestApiController {
 					HttpStatus.NOT_FOUND);
 		}
 
-		return new ResponseEntity<UnidadeSaude>( us, HttpStatus.OK);
+		return new ResponseEntity<UnidadeSaude>(us, HttpStatus.OK);
 	}
 
 	public int numeroQueixasAbertas() {

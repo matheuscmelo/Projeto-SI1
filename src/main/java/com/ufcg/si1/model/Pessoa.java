@@ -7,7 +7,8 @@ public class Pessoa{
 	private String email;
 	private Endereco endereco;
 	
-
+	public Pessoa(){}
+	
 	public Pessoa(String nome, String email, String rua, String uf,
 			String cidade) {
 		this.nome = nome;
@@ -50,4 +51,17 @@ public class Pessoa{
 	public String getCidade() {
 		return this.endereco.getCidade();
 	}
+	
+	public void setRua(String rua) {
+		this.endereco.setRua(rua);
+	}
+	
+	public void setCidade(String cidade){
+		this.endereco.setCidade(cidade);
+	}
+	
+	public void setUf(String uf) {
+		this.endereco.setUf(uf);
+	}
 }
+

@@ -25,6 +25,8 @@ public class Queixa {
 		this.comentario = comentario;
 		this.solicitante = new Pessoa(nome, email, rua, uf, cidade);
 	}
+	
+	public Queixa() {}
 
 	public long getId() {
 		return id;
