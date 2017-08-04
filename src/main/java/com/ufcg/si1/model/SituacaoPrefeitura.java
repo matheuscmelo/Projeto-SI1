@@ -2,10 +2,10 @@ package com.ufcg.si1.model;
 
 public class SituacaoPrefeitura {
 	
-	IFSituacaoPrefeitura situacaoPrefeitura;
+	EficienciaTemplate situacaoPrefeitura;
 	
 	public SituacaoPrefeitura() {
-		this.situacaoPrefeitura = new SituacaoNormal();
+		this.situacaoPrefeitura = new EficienciaImplNormal();
 	}
 	
 	public int calculaSituacao(int numeroQueixasAbertas, int numeroDeQueixas) {
@@ -13,15 +13,15 @@ public class SituacaoPrefeitura {
 	}
 
 	public void mudaParaCaos() {
-		this.situacaoPrefeitura = new SituacaoCaos();
+		this.situacaoPrefeitura = new EficienciaImplCaos();
 	}
 
 	public void mudaParaExtra() {
-		this.situacaoPrefeitura = new SituacaoExtra();
+		this.situacaoPrefeitura = new EficienciaImplExtra();
 	}
 
 	public void mudaParaNormal() {
-		this.situacaoPrefeitura = new SituacaoNormal();
+		this.situacaoPrefeitura = new EficienciaImplNormal();
 	}
 
 }
