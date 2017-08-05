@@ -46,7 +46,7 @@ public class SpringBootRestTestClient {
     }
      
     /* POST */
-    private static void createQueixa() {
+    /*private static void createQueixa() {
         System.out.println("Testing create Queixa API----------");
         RestTemplate restTemplate = new RestTemplate();
 
@@ -56,10 +56,10 @@ public class SpringBootRestTestClient {
                 "São Paulo");
         URI uri = restTemplate.postForLocation(REST_SERVICE_URI+"/queixa/", q, Queixa.class);
         System.out.println("Location : "+uri.toASCIIString());
-    }
+    }*/
  
     /* PUT */
-    private static void updateQueixa() {
+   /* private static void updateQueixa() {
         System.out.println("Testing update Queixa API----------");
         RestTemplate restTemplate = new RestTemplate();
         Queixa q = new Queixa(1,"Nova queixa com ID 1",1,"",
@@ -67,7 +67,7 @@ public class SpringBootRestTestClient {
                 "São Paulo");
         restTemplate.put(REST_SERVICE_URI+"/queixa/1", q);
         System.out.println(q);
-    }
+    }*/
  
     /* DELETE */
     private static void deleteUser() {
@@ -157,7 +157,7 @@ public class SpringBootRestTestClient {
 
         restTemplate.postForLocation(REST_SERVICE_URI+"/queixa/fechamento", queixa, Queixa.class);
         queixa = restTemplate.getForObject(REST_SERVICE_URI+"/queixa/"+i, Queixa.class);
-        System.out.println(queixa.situacao);
+        //System.out.println(queixa.situacao);
 
     }
 
