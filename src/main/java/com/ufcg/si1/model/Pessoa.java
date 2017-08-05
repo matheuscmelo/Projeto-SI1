@@ -1,16 +1,15 @@
 package com.ufcg.si1.model;
 
-public class Pessoa{
-	
-	
+public class Pessoa {
+
 	private String nome;
 	private String email;
 	private Endereco endereco;
-	
-	public Pessoa(){}
-	
-	public Pessoa(String nome, String email, String rua, String uf,
-			String cidade) {
+
+	public Pessoa() {
+	}
+
+	public Pessoa(String nome, String email, String rua, String uf, String cidade) {
 		this.nome = nome;
 		this.email = email;
 		this.endereco = new Endereco(rua, uf, cidade);
@@ -51,17 +50,16 @@ public class Pessoa{
 	public String getCidade() {
 		return this.endereco.getCidade();
 	}
-	
+
 	public void setRua(String rua) {
 		this.endereco.setRua(rua);
 	}
-	
-	public void setCidade(String cidade){
+
+	public void setCidade(String cidade) {
 		this.endereco.setCidade(cidade);
 	}
-	
+
 	public void setUf(String uf) {
 		this.endereco.setUf(uf);
 	}
 }
-

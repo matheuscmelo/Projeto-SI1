@@ -15,18 +15,17 @@ public class Queixa {
 	private SituacaoQueixa situacaoQueixa;
 	private String comentario = ""; // usado na atualizacao da queixa
 
+	public Queixa() {
+	}
 
-	public Queixa(long id, String descricao, String comentario,
-                  String nome, String email,
-				  String rua, String uf, String cidade) {
+	public Queixa(long id, String descricao, String comentario, String nome, String email, String rua, String uf,
+			String cidade) {
 		this.id = id;
 		this.descricao = descricao;
 		this.situacaoQueixa = SituacaoQueixa.ABERTA;
 		this.comentario = comentario;
 		this.solicitante = new Pessoa(nome, email, rua, uf, cidade);
 	}
-	
-	public Queixa() {}
 
 	public long getId() {
 		return id;
@@ -47,20 +46,20 @@ public class Queixa {
 	public SituacaoQueixa getSituacao() {
 		return situacaoQueixa;
 	}
-	
+
 	public void setSituacao(SituacaoQueixa situacao) {
 		this.situacaoQueixa = situacao;
 	}
 
 	public void emAndamento() throws ObjetoInvalidoException {
-		if(this.situacaoQueixa == SituacaoQueixa.ABERTA)
+		if (this.situacaoQueixa == SituacaoQueixa.ABERTA)
 			this.setSituacao(SituacaoQueixa.EM_ANDAMENTO);
 		else
 			throw new ObjetoInvalidoException("Status Inválido");
 	}
+
 	public void fechar(String coment) throws ObjetoInvalidoException {
-		if (this.situacaoQueixa == SituacaoQueixa.EM_ANDAMENTO
-				|| this.situacaoQueixa == SituacaoQueixa.ABERTA) {
+		if (this.situacaoQueixa == SituacaoQueixa.EM_ANDAMENTO || this.situacaoQueixa == SituacaoQueixa.ABERTA) {
 			this.situacaoQueixa = SituacaoQueixa.FECHADA;
 			this.comentario = coment;
 		} else

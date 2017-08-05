@@ -65,11 +65,11 @@ public class QueixaREST {
 	@RequestMapping(value = "/queixa/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Queixa> consultarQueixa(@PathVariable("id") long id) {
 
-		Queixa q = queixaService.findById(id);
-		if (q == null) {
+		Queixa queixa = queixaService.findById(id);
+		if (queixa == null) {
 			return new ResponseEntity(new CustomErrorType("Queixa with id " + id + " not found"), HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<Queixa>(q, HttpStatus.OK);
+		return new ResponseEntity<Queixa>(queixa, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/queixa/{id}", method = RequestMethod.PUT)

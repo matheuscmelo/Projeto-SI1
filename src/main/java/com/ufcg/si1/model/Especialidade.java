@@ -45,8 +45,7 @@ public class Especialidade {
 	public boolean equals(Object obj) {
 		if (obj instanceof Especialidade) {
 			Especialidade esp = (Especialidade) obj;
-			if (esp.getDescricao().equals(this.getDescricao()) 
-					&& esp.getCodigo() == this.getCodigo())
+			if (esp.getDescricao().equals(this.getDescricao()) && esp.getCodigo() == this.getCodigo())
 				return true;
 		}
 		return false;

@@ -47,11 +47,11 @@ public class EspecialidadeREST {
 	public ResponseEntity<?> consultarEspecialidade(@PathVariable("id") long id)
 			throws Rep, ObjetoInexistenteException {
 
-		Especialidade q = especialidadeService.procura(id);
-		if (q == null) {
+		Especialidade esp = especialidadeService.procura(id);
+		if (esp == null) {
 			return new ResponseEntity(new CustomErrorType("Especialidade with id " + id + " not found"),
 					HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<Especialidade>(q, HttpStatus.OK);
+		return new ResponseEntity<Especialidade>(esp, HttpStatus.OK);
 	}
 }
