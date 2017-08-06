@@ -1,7 +1,7 @@
 package com.ufcg.si1.model;
 
 public class Pessoa {
-
+	
 	private String nome;
 	private String email;
 	private Endereco endereco;

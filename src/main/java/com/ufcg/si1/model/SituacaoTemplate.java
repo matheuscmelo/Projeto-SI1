@@ -1,6 +1,6 @@
 package com.ufcg.si1.model;
 
-public abstract class EficienciaTemplate {
+public abstract class SituacaoTemplate {
 	
 	public int calculaSituacao(int queixasAbertas, int queixasTotais) {
 		int situacao = -1;
