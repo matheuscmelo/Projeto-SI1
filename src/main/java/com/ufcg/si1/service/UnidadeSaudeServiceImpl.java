@@ -14,12 +14,6 @@ public class UnidadeSaudeServiceImpl implements UnidadeSaudeService {
 
 	public UnidadeSaudeServiceImpl() {
 		this.unidades = new HashSet<>();
-		populate(); // pra testar xD
-	}
-	
-	
-	private void populate() {
-		this.unidades.add(new UnidadeSaude("Posto de saude de olivedos city", 5, 6, "Posto de saude", "catole"));
 	}
 	
 	@Override
@@ -39,6 +33,7 @@ public class UnidadeSaudeServiceImpl implements UnidadeSaudeService {
 
 	@Override
 	public void insere(UnidadeSaude us) throws ObjetoJaExistenteException {
+		if (unidades.contains(us)) throw new ObjetoJaExistenteException("Unidade de saude ja adicionada.");
 		this.unidades.add(us);
 	}
 

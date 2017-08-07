@@ -7,58 +7,6 @@ import java.util.Set;
 
 
 public class UnidadeSaude {
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((bairro == null) ? 0 : bairro.hashCode());
-		result = prime * result + (int) (codigo ^ (codigo >>> 32));
-		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
-		result = prime * result + ((especialidades == null) ? 0 : especialidades.hashCode());
-		result = prime * result + numeroMedicos;
-		result = prime * result + numeroPacientesDia;
-		result = prime * result + ((tipo == null) ? 0 : tipo.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		UnidadeSaude other = (UnidadeSaude) obj;
-		if (bairro == null) {
-			if (other.bairro != null)
-				return false;
-		} else if (!bairro.equals(other.bairro))
-			return false;
-		if (codigo != other.codigo)
-			return false;
-		if (descricao == null) {
-			if (other.descricao != null)
-				return false;
-		} else if (!descricao.equals(other.descricao))
-			return false;
-		if (especialidades == null) {
-			if (other.especialidades != null)
-				return false;
-		} else if (!especialidades.equals(other.especialidades))
-			return false;
-		if (numeroMedicos != other.numeroMedicos)
-			return false;
-		if (numeroPacientesDia != other.numeroPacientesDia)
-			return false;
-		if (tipo == null) {
-			if (other.tipo != null)
-				return false;
-		} else if (!tipo.equals(other.tipo))
-			return false;
-		return true;
-	}
-
 	@JsonProperty(value = "codigo")
 	private long codigo; // gerado no repositorio
 	@JsonProperty(value = "descricao")
@@ -144,5 +92,61 @@ public class UnidadeSaude {
 	public Object getEspecialidades() {
 		return especialidades;
 	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((bairro == null) ? 0 : bairro.hashCode());
+		result = prime * result + (int) (codigo ^ (codigo >>> 32));
+		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
+		result = prime * result + ((especialidades == null) ? 0 : especialidades.hashCode());
+		result = prime * result + numeroMedicos;
+		result = prime * result + numeroPacientesDia;
+		result = prime * result + ((tipo == null) ? 0 : tipo.hashCode());
+		return result;
+	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		UnidadeSaude other = (UnidadeSaude) obj;
+		if (bairro == null) {
+			if (other.bairro != null)
+				return false;
+		} else if (!bairro.equals(other.bairro))
+			return false;
+		if (codigo != other.codigo)
+			return false;
+		if (descricao == null) {
+			if (other.descricao != null)
+				return false;
+		} else if (!descricao.equals(other.descricao))
+			return false;
+		if (especialidades == null) {
+			if (other.especialidades != null)
+				return false;
+		} else if (!especialidades.equals(other.especialidades))
+			return false;
+		if (numeroMedicos != other.numeroMedicos)
+			return false;
+		if (numeroPacientesDia != other.numeroPacientesDia)
+			return false;
+		if (tipo == null) {
+			if (other.tipo != null)
+				return false;
+		} else if (!tipo.equals(other.tipo))
+			return false;
+		return true;
+	}
+	
+	@Override
+	public String toString() {
+		return this.tipo;
+	}
 }

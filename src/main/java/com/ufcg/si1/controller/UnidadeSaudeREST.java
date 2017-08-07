@@ -34,21 +34,21 @@ public class UnidadeSaudeREST {
 	@RequestMapping(value = "/especialidade/unidades", method = RequestMethod.GET)
 	public ResponseEntity<?> consultaEspecialidadeporUnidadeSaude(@RequestBody int codigoUnidadeSaude) {
 
-		UnidadeSaude us = unidadeSaudeService.procura(codigoUnidadeSaude);
+		UnidadeSaude unidade = unidadeSaudeService.procura(codigoUnidadeSaude);
 
-		if (us == null) {
+		if (unidade == null) {
 			return new ResponseEntity<List>(HttpStatus.NOT_FOUND);
 		}
 
-		return new ResponseEntity<>(us.getEspecialidades(), HttpStatus.OK);
+		return new ResponseEntity<>(unidade.getEspecialidades(), HttpStatus.OK);
 
 	}
 
 	@RequestMapping(value = "/unidade/", method = RequestMethod.GET)
 	public ResponseEntity<?> getAllUnidades() {
 		Set<UnidadeSaude> unidades = unidadeSaudeService.getAll();
-		if (unidades.isEmpty())
-			return new ResponseEntity<List>(HttpStatus.NOT_FOUND);
+		if (unidades.isEmpty()) 
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		else {
 			List<UnidadeSaude> unidadeSaudes = new ArrayList<>();
 			for (Object saude : unidades) {
@@ -82,12 +82,12 @@ public class UnidadeSaudeREST {
 	@RequestMapping(value = "/unidade/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> consultarUnidadeSaude(@PathVariable("id") long id) {
 
-		Object us = unidadeSaudeService.procura(id);
-		if (us == null) {
+		UnidadeSaude unidade = unidadeSaudeService.procura(id);
+		if (unidade == null) {
 			return new ResponseEntity(new CustomErrorType("Unidade with id " + id + " not found"),
 					HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<>(us, HttpStatus.OK);
+		return new ResponseEntity<>(unidade, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/geral/medicos/{id}", method = RequestMethod.GET)
@@ -110,12 +110,12 @@ public class UnidadeSaudeREST {
 	public ResponseEntity<?> consultarUnidadeSaudePorBairro(
 			@RequestParam(value = "bairro", required = true) String bairro) {
 
-		UnidadeSaude us = unidadeSaudeService.findByBairro(bairro);
-		if (us == null) {
+		UnidadeSaude unidade = unidadeSaudeService.findByBairro(bairro);
+		if (unidade == null || !unidade.getBairro().equals(bairro)) {
 			return new ResponseEntity(new CustomErrorType("Unidade with bairro " + bairro + " not found"),
 					HttpStatus.NOT_FOUND);
 		}
 
-		return new ResponseEntity<UnidadeSaude>(us, HttpStatus.OK);
+		return new ResponseEntity<UnidadeSaude>(unidade, HttpStatus.OK);
 	}
 }
