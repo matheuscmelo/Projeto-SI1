@@ -2,6 +2,8 @@ package com.ufcg.si1;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import org.junit.Before;
@@ -42,13 +44,16 @@ public class RestApiControllerTest {
 
 	@Test
 	public void testAdicaoQueixa() throws ObjetoInvalidoException {
-		Queixa q = new Queixa(0, "ddd", "fff", "wesley", "fff", "fff", "fff", "fff");
-		assertTrue(this.queixaRest.numeroQueixasAbertas() == 0);
-		this.queixaRest.abrirQueixa(q);
-		assertTrue(this.queixaRest.numeroQueixasAbertas() == 1);
-		assertEquals(this.queixaRest.consultarQueixa(1), new ResponseEntity<Queixa>(q, HttpStatus.OK));
-		this.queixaRest.fecharQueixa(q);
-		assertEquals(this.queixaRest.numeroQueixasAbertas(), 0);
+		Queixa queixa1 = new Queixa(1, "ddd", "fff", "wesley", "fff", "fff", "fff", "fff");
+		assertEquals(new ResponseEntity(HttpStatus.NO_CONTENT), this.queixaRest.listAllUsers());
+		this.queixaRest.abrirQueixa(queixa1);
+		ArrayList<Queixa> queixas = new ArrayList<Queixa>();
+		queixas.add(queixa1);
+		assertEquals(new ResponseEntity<List<Queixa>>(queixas, HttpStatus.OK), this.queixaRest.listAllUsers());
+		assertEquals(this.queixaRest.consultarQueixa(1), new ResponseEntity<Queixa>(queixa1, HttpStatus.OK));
+
+		this.queixaRest.fecharQueixa(queixa1);
+
 	}
 
 	@Test
@@ -61,18 +66,22 @@ public class RestApiControllerTest {
 		assertEquals(this.espRest.consultarEspecialidade(2), new ResponseEntity<Especialidade>(e1, HttpStatus.OK));
 		Especialidade e2 = new Especialidade("fazer menes");
 		this.espRest.incluirEspecialidade(e2);
-		
+
 	}
 
 	@Test
 	public void testUS() {
-		
+
 		UnidadeSaude us1 = new UnidadeSaude("lugar de dá a bunda", 24, 4, "Hospital", "zepa");
 		UnidadeSaude us2 = new UnidadeSaude("canto nenhum", 60, 1, "Posto de Saude", "catole");
 		UnidadeSaude us3 = new UnidadeSaude("Posto de saude de olivedos city", 5, 6, "Posto de saude", "catole");
 		us1.setCodigo(1);
 		us2.setCodigo(2);
-		
+
+		HashSet<UnidadeSaude> unidades = new HashSet<>();
+		unidades.add(us1);
+		unidades.add(us2);
+		unidades.add(us3);
 		assertEquals(this.unidadeRest.getAllUnidades(), new ResponseEntity<List>(HttpStatus.NOT_FOUND));
 		assertEquals(this.unidadeRest.incluirUnidadeSaude(us1), new ResponseEntity<String>(HttpStatus.CREATED));
 		assertEquals(this.unidadeRest.incluirUnidadeSaude(us1), new ResponseEntity<String>(HttpStatus.CONFLICT));
@@ -81,14 +90,19 @@ public class RestApiControllerTest {
 
 		assertEquals(this.unidadeRest.consultarUnidadeSaude(1), new ResponseEntity<>(us1, HttpStatus.OK));
 		assertEquals(this.unidadeRest.consultarUnidadeSaude(3),
-				
-				new ResponseEntity(new CustomErrorType("Unidade with id " + 3 + " not found"), HttpStatus.NOT_FOUND));
-		
-		assertEquals(this.unidadeRest.consultarUnidadeSaudePorBairro("zepa"), new ResponseEntity<>(us1, HttpStatus.OK));
-		assertEquals(this.unidadeRest.consultarUnidadeSaudePorBairro("z"), new ResponseEntity(new CustomErrorType("Unidade with bairro z not found"),
-				HttpStatus.NOT_FOUND));
-		assertEquals(this.unidadeRest.consultarUnidadeSaudePorBairro("catole"), new ResponseEntity<>(us3, HttpStatus.OK));
 
-		assertEquals(this.unidadeRest.consultaEspecialidadeporUnidadeSaude(2), new ResponseEntity<>(us2.getEspecialidades(), HttpStatus.OK));
+				new ResponseEntity(new CustomErrorType("Unidade with id " + 3 + " not found"), HttpStatus.NOT_FOUND));
+
+		assertEquals(this.unidadeRest.consultarUnidadeSaudePorBairro("zepa"), new ResponseEntity<>(us1, HttpStatus.OK));
+		assertEquals(this.unidadeRest.consultarUnidadeSaudePorBairro("z"),
+				new ResponseEntity(new CustomErrorType("Unidade with bairro z not found"), HttpStatus.NOT_FOUND));
+		assertEquals(this.unidadeRest.consultarUnidadeSaudePorBairro("catole"),
+				new ResponseEntity<>(us3, HttpStatus.OK));
+
+		assertEquals(this.unidadeRest.consultaEspecialidadeporUnidadeSaude(2),
+				new ResponseEntity<>(us2.getEspecialidades(), HttpStatus.OK));
+
+		assertEquals(new ResponseEntity<>(unidades, HttpStatus.OK), this.unidadeRest.getAllUnidades());
+
 	}
 }

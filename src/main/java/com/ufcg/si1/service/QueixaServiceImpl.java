@@ -35,11 +35,11 @@ public class QueixaServiceImpl implements QueixaService {
 			queixas.set(index, queixa);
 		}
 	}
-	
-	public void fecharqueixa(Queixa queixa,String coment) throws ObjetoInvalidoException {
+
+	public void fecharqueixa(Queixa queixa, String coment) throws ObjetoInvalidoException {
 		queixa.fechar(coment);
 	}
-	
+
 	public void abrirQueixa(Queixa queixa) {
 		queixa.setSituacao(SituacaoQueixa.ABERTA);
 	}
@@ -75,6 +75,19 @@ public class QueixaServiceImpl implements QueixaService {
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public int numeroQueixasAbertas() {
+		int contador = 0;
+		Iterator<Queixa> it = this.getIterator();
+		for (Iterator<Queixa> it1 = it; it1.hasNext();) {
+			Queixa q = it1.next();
+			if (q.getSituacao() == SituacaoQueixa.ABERTA)
+				contador++;
+		}
+
+		return contador;
 	}
 
 }

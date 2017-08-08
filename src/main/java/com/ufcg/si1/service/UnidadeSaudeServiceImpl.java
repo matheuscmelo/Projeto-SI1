@@ -5,7 +5,9 @@ import exceptions.ObjetoInexistenteException;
 import exceptions.ObjetoJaExistenteException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Service("unidadeSaudeService")
@@ -15,7 +17,7 @@ public class UnidadeSaudeServiceImpl implements UnidadeSaudeService {
 	public UnidadeSaudeServiceImpl() {
 		this.unidades = new HashSet<>();
 	}
-	
+
 	@Override
 	public UnidadeSaude procura(long codigo) {
 		for (UnidadeSaude unidadeSaude : unidades) {
@@ -33,14 +35,15 @@ public class UnidadeSaudeServiceImpl implements UnidadeSaudeService {
 
 	@Override
 	public void insere(UnidadeSaude us) throws ObjetoJaExistenteException {
-		if (unidades.contains(us)) throw new ObjetoJaExistenteException("Unidade de saude ja adicionada.");
+		if (unidades.contains(us))
+			throw new ObjetoJaExistenteException("Unidade de saude ja adicionada.");
 		this.unidades.add(us);
 	}
 
 	@Override
 	public boolean existe(long codigo) {
 		for (UnidadeSaude unidadeSaude : unidades) {
-			if(unidadeSaude.getCodigo() == codigo) {
+			if (unidadeSaude.getCodigo() == codigo) {
 				return true;
 			}
 		}
@@ -50,10 +53,12 @@ public class UnidadeSaudeServiceImpl implements UnidadeSaudeService {
 	@Override
 	public UnidadeSaude findByBairro(String bairro) {
 		for (UnidadeSaude unidadeSaude : unidades) {
-			if(unidadeSaude.getBairro().equals(bairro)) {
+			if (unidadeSaude.getBairro().equals(bairro)) {
 				return unidadeSaude;
 			}
 		}
 		return null;
 	}
+
+
 }

@@ -29,8 +29,8 @@ public class QueixaREST {
 
 	private QueixaService queixaService = new QueixaServiceImpl();
 
-	//situação normal =0 situação extra =1
-	
+	// situação normal =0 situação extra =1
+
 	private SituacaoPrefeitura situacaoPrefeitura = new SituacaoPrefeitura();
 
 	// -------------------Retrieve All
@@ -63,8 +63,7 @@ public class QueixaREST {
 	}
 
 	@RequestMapping(value = "/queixa/{id}", method = RequestMethod.GET)
-	public ResponseEntity<Queixa> consultarQueixa(@PathVariable("id") long id) {
-
+	public ResponseEntity<Queixa> consultarQueixa(@PathVariable("id") long id) {	
 		Queixa queixa = queixaService.findById(id);
 		if (queixa == null) {
 			return new ResponseEntity(new CustomErrorType("Queixa with id " + id + " not found"), HttpStatus.NOT_FOUND);
@@ -105,20 +104,9 @@ public class QueixaREST {
 	@RequestMapping(value = "/geral/situacao", method = RequestMethod.GET)
 	public ResponseEntity<?> getSituacaoGeralQueixas() {
 
-		int situacao = situacaoPrefeitura.calculaSituacao(numeroQueixasAbertas(), queixaService.size());
+		int situacao = situacaoPrefeitura.calculaSituacao(queixaService.numeroQueixasAbertas(), queixaService.size());
 
 		return new ResponseEntity<ObjWrapper<Integer>>(new ObjWrapper<Integer>(situacao), HttpStatus.OK);
 	}
 
-	public int numeroQueixasAbertas() {
-		int contador = 0;
-		Iterator<Queixa> it = queixaService.getIterator();
-		for (Iterator<Queixa> it1 = it; it1.hasNext();) {
-			Queixa q = it1.next();
-			if (q.getSituacao() == SituacaoQueixa.ABERTA)
-				contador++;
-		}
-
-		return contador;
-	}
 }

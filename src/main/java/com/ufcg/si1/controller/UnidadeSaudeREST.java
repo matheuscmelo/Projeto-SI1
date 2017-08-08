@@ -27,15 +27,11 @@ import exceptions.ObjetoJaExistenteException;
 @CrossOrigin
 public class UnidadeSaudeREST {
 
-
 	private UnidadeSaudeService unidadeSaudeService = new UnidadeSaudeServiceImpl();
-
 
 	@RequestMapping(value = "/especialidade/unidades", method = RequestMethod.GET)
 	public ResponseEntity<?> consultaEspecialidadeporUnidadeSaude(@RequestBody int codigoUnidadeSaude) {
-
 		UnidadeSaude unidade = unidadeSaudeService.procura(codigoUnidadeSaude);
-
 		if (unidade == null) {
 			return new ResponseEntity<List>(HttpStatus.NOT_FOUND);
 		}
@@ -46,21 +42,14 @@ public class UnidadeSaudeREST {
 
 	@RequestMapping(value = "/unidade/", method = RequestMethod.GET)
 	public ResponseEntity<?> getAllUnidades() {
-		Set<UnidadeSaude> unidades = unidadeSaudeService.getAll();
-		if (unidades.isEmpty()) 
+		Set<UnidadeSaude> unidadesSaude = unidadeSaudeService.getAll();
+		if (unidadesSaude.isEmpty()) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		else {
-			List<UnidadeSaude> unidadeSaudes = new ArrayList<>();
-			for (Object saude : unidades) {
-				if (saude instanceof UnidadeSaude) {
-					unidadeSaudes.add((UnidadeSaude) saude);
-				}
-			}
-			return new ResponseEntity<>(unidadeSaudes, HttpStatus.OK);
 		}
-	}
 
-	
+		return new ResponseEntity<>(unidadesSaude, HttpStatus.OK);
+
+	}
 
 	// how to save a subclass object?
 	@RequestMapping(value = "/unidade/", method = RequestMethod.POST)
@@ -76,8 +65,6 @@ public class UnidadeSaudeREST {
 		// headers.setLocation(ucBuilder.path("/api/unidade/{id}").buildAndExpand(us.pegaCodigo()).toUri());
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
-
-	
 
 	@RequestMapping(value = "/unidade/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> consultarUnidadeSaude(@PathVariable("id") long id) {
@@ -103,8 +90,6 @@ public class UnidadeSaudeREST {
 
 		return new ResponseEntity<ObjWrapper<Double>>(new ObjWrapper<Double>(new Double(result)), HttpStatus.OK);
 	}
-
-	
 
 	@RequestMapping(value = "/unidade/busca", method = RequestMethod.GET)
 	public ResponseEntity<?> consultarUnidadeSaudePorBairro(
