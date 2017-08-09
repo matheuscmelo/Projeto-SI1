@@ -1,23 +1,23 @@
 package com.ufcg.si1.model;
 
-public abstract class SituacaoTemplate {
+public abstract class EficienciaTemplate {
 	
 	private static final int RUIM = 0;
 	private static final int REGULAR = 1;
 	private static final int BOM = 2;
 	
-	public int calculaSituacao(int queixasAbertas, int queixasTotais) {
-		int situacao;
+	public int calculaEficiencia(int queixasAbertas, int queixasTotais) {
+		int eficiencia;
 		
 		if (condicaoRuim(queixasAbertas, queixasTotais)) {
-			situacao = RUIM;
+			eficiencia = RUIM;
 		} else if (condicaoRegular(queixasAbertas, queixasTotais)) {
-			situacao = REGULAR;
+			eficiencia = REGULAR;
 		} else {
-			situacao = BOM;
+			eficiencia = BOM;
 		}
 		
-		return situacao;
+		return eficiencia;
 	}
 	
 	public abstract boolean condicaoRuim(int queixasAbertas, int queixasTotais);

@@ -1,6 +1,6 @@
 package com.ufcg.si1.model;
 
-public class SituacaoExtra extends SituacaoTemplate {
+public class SituacaoExtra extends EficienciaTemplate {
 
 	@Override
 	public boolean condicaoRuim(int queixasAbertas, int queixasTotais) {

@@ -2,14 +2,14 @@ package com.ufcg.si1.model;
 
 public class SituacaoPrefeitura {
 	
-	SituacaoTemplate situacaoPrefeitura;
+	EficienciaTemplate situacaoPrefeitura;
 	
 	public SituacaoPrefeitura() {
 		this.situacaoPrefeitura = new SituacaoNormal();
 	}
 	
-	public int calculaSituacao(int numeroQueixasAbertas, int numeroDeQueixas) {
-		return this.situacaoPrefeitura.calculaSituacao(numeroQueixasAbertas, numeroDeQueixas);
+	public int calculaEficiencia(int numeroQueixasAbertas, int numeroDeQueixas) {
+		return this.situacaoPrefeitura.calculaEficiencia(numeroQueixasAbertas, numeroDeQueixas);
 	}
 
 	public void mudaParaCaos() {
