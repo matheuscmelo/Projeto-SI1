@@ -104,9 +104,9 @@ public class QueixaREST {
 	@RequestMapping(value = "/geral/situacao", method = RequestMethod.GET)
 	public ResponseEntity<?> getSituacaoGeralQueixas() {
 
-		int eficiencia = situacaoPrefeitura.calculaEficiencia(queixaService.numeroQueixasAbertas(), queixaService.size());
+		int situacao = situacaoPrefeitura.calculaEficiencia(queixaService.numeroQueixasAbertas(), queixaService.size());
 
-		return new ResponseEntity<ObjWrapper<Integer>>(new ObjWrapper<Integer>(eficiencia), HttpStatus.OK);
+		return new ResponseEntity<ObjWrapper<Integer>>(new ObjWrapper<Integer>(situacao), HttpStatus.OK);
 	}
 
 }
