@@ -8,9 +8,7 @@ import org.springframework.http.ResponseEntity;
 public class Queixa {
 	@Autowired
 	private long id;
-
 	private String descricao;
-
 	private Pessoa solicitante;
 	private SituacaoQueixa situacaoQueixa;
 	private String comentario = ""; // usado na atualizacao da queixa
@@ -22,7 +20,7 @@ public class Queixa {
 			String cidade) {
 		this.id = id;
 		this.descricao = descricao;
-		this.situacaoQueixa = SituacaoQueixa.ABERTA;
+		this.situacaoQueixa = new QueixaAberta();
 		this.comentario = comentario;
 		this.solicitante = new Pessoa(nome, email, rua, uf, cidade);
 	}
@@ -52,18 +50,11 @@ public class Queixa {
 	}
 
 	public void emAndamento() throws ObjetoInvalidoException {
-		if (this.situacaoQueixa == SituacaoQueixa.ABERTA)
-			this.setSituacao(SituacaoQueixa.EM_ANDAMENTO);
-		else
-			throw new ObjetoInvalidoException("Status Inválido");
+		this.situacaoQueixa.emAndamento(this);
 	}
 
 	public void fechar(String coment) throws ObjetoInvalidoException {
-		if (this.situacaoQueixa == SituacaoQueixa.EM_ANDAMENTO || this.situacaoQueixa == SituacaoQueixa.ABERTA) {
-			this.situacaoQueixa = SituacaoQueixa.FECHADA;
-			this.comentario = coment;
-		} else
-			throw new ObjetoInvalidoException("Status Inválido");
+		this.situacaoQueixa.fechar(this, coment);
 	}
 
 	public String getComentario() {

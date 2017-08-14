@@ -1,6 +1,7 @@
 package com.ufcg.si1.service;
 
 import com.ufcg.si1.model.Queixa;
+import com.ufcg.si1.model.QueixaAberta;
 import com.ufcg.si1.model.SituacaoQueixa;
 
 import exceptions.ObjetoInvalidoException;
@@ -41,7 +42,8 @@ public class QueixaServiceImpl implements QueixaService {
 	}
 
 	public void abrirQueixa(Queixa queixa) {
-		queixa.setSituacao(SituacaoQueixa.ABERTA);
+		queixa.setSituacao(new QueixaAberta());
+		
 	}
 
 	public void deleteQueixaById(long id) {
@@ -83,7 +85,7 @@ public class QueixaServiceImpl implements QueixaService {
 		Iterator<Queixa> it = this.getIterator();
 		for (Iterator<Queixa> it1 = it; it1.hasNext();) {
 			Queixa q = it1.next();
-			if (q.getSituacao() == SituacaoQueixa.ABERTA)
+			if (q.getSituacao() instanceof QueixaAberta)
 				contador++;
 		}
 

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ufcg.si1.model.Queixa;
+import com.ufcg.si1.model.QueixaAberta;
 import com.ufcg.si1.model.SituacaoPrefeitura;
 import com.ufcg.si1.model.SituacaoQueixa;
 import com.ufcg.si1.service.QueixaService;
@@ -109,4 +110,6 @@ public class QueixaREST {
 		return new ResponseEntity<ObjWrapper<Integer>>(new ObjWrapper<Integer>(situacao), HttpStatus.OK);
 	}
 
+	
+	
 }
