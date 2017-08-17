@@ -9,24 +9,20 @@ import exceptions.ObjetoInvalidoException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
 
 @Service("queixaService")
 public class QueixaServiceImpl implements QueixaService {
 
-	private static final AtomicLong counter = new AtomicLong();
-
-	private static List<Queixa> queixas = new ArrayList<Queixa>();
+	private List<Queixa> queixas = new ArrayList<Queixa>();
 
 	public List<Queixa> findAllQueixas() {
 		return queixas;
 	}
 
 	public void saveQueixa(Queixa queixa) {
-		queixa.setId(counter.incrementAndGet());
 		queixas.add(queixa);
+		queixa.setId(this.size());
 	}
 
 	public void updateQueixa(Queixa queixa) throws ObjetoInvalidoException {
@@ -47,23 +43,13 @@ public class QueixaServiceImpl implements QueixaService {
 	}
 
 	public void deleteQueixaById(long id) {
-
-		for (Iterator<Queixa> iterator = queixas.iterator(); iterator.hasNext();) {
-			Queixa q = iterator.next();
-			if (q.getId() == id) {
-				iterator.remove();
-			}
-		}
+		Queixa queixa = findById(id);
+		queixas.remove(queixa);
 	}
 
 	@Override
 	public int size() {
 		return queixas.size();
-	}
-
-	@Override
-	public Iterator<Queixa> getIterator() {
-		return queixas.iterator();
 	}
 
 	public void deleteAllUsers() {
@@ -81,15 +67,13 @@ public class QueixaServiceImpl implements QueixaService {
 
 	@Override
 	public int numeroQueixasAbertas() {
-		int contador = 0;
-		Iterator<Queixa> it = this.getIterator();
-		for (Iterator<Queixa> it1 = it; it1.hasNext();) {
-			Queixa q = it1.next();
-			if (q.getSituacao() instanceof QueixaAberta)
-				contador++;
+		int queixasAbertas = 0;
+		for (Queixa queixa : queixas) {
+			if (queixa.getSituacao() instanceof QueixaAberta)
+				queixasAbertas++;
 		}
 
-		return contador;
+		return queixasAbertas;
 	}
 
 }

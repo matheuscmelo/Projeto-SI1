@@ -45,8 +45,8 @@ public class RestApiControllerTest {
 	@Test
 	public void testAdicaoQueixa() throws ObjetoInvalidoException {
 		Queixa queixa1 = new Queixa(1, "ddd", "fff", "wesley", "fff", "fff", "fff", "fff");
-
-		assertEquals(new ResponseEntity(HttpStatus.NO_CONTENT), this.queixaRest.listAllUsers());
+		
+		assertEquals(new ResponseEntity<Queixa>(HttpStatus.NO_CONTENT), this.queixaRest.listAllUsers());
 		this.queixaRest.abrirQueixa(queixa1);
 
 		ArrayList<Queixa> queixas = new ArrayList<Queixa>();
