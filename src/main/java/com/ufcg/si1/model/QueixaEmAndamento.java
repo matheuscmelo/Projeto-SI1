@@ -15,5 +15,10 @@ public class QueixaEmAndamento implements SituacaoQueixa {
 		queixa.setSituacao(new QueixaFechada());
 		queixa.setComentario(comentario);
 	}
+	
+	@Override
+	public boolean isAberta() {
+		return false;
+	}
 
 }
