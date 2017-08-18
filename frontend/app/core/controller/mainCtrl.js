@@ -1,7 +1,7 @@
-app.controller("registerComplaintCtrl", function ($scope, $http, toastr, $location) {
+app.controller("registerComplaintCtrl", function ($scope, toastr, $location, RESTService) {
 
     $scope.registerComplaint = function (complaint) {
-        $http.post("http://localhost:5000/SpringBootRestApi/api/queixa/", JSON.stringify(complaint))
+        RESTService.registerComplaint(complaint)
             .then(function success(response) {
                 toastr.success("Queixa adicionada com sucesso!");
                 $location.path('/createdcomplaint/' + response.data.id);
@@ -12,12 +12,13 @@ app.controller("registerComplaintCtrl", function ($scope, $http, toastr, $locati
     }
 });
 
-app.controller("searchAverangeCtrl", function ($scope, $http) {
+app.controller("searchAverangeCtrl", function ($scope, RESTService) {
 
     $scope.average = null;
 
     $scope.searchAveragePerPatient = function (id) {
-        $http.get("http://localhost:5000/SpringBootRestApi/api/geral/medicos/" + id).then(function successCallback(response) {
+        RESTService.searchAveragePerPatient(id)
+        .then(function successCallback(response) {
             $scope.average = response.data.obj;
         }, function errorCallback(error) {
             console.log("Unidade Não Encontrada");
@@ -25,11 +26,12 @@ app.controller("searchAverangeCtrl", function ($scope, $http) {
     }
 });
 
-app.controller("searchComplaintCtrl", function ($scope, $http) {
+app.controller("searchComplaintCtrl", function ($scope, RESTService) {
     $scope.complaint;
 
     $scope.searchComplaint = function (id) {
-        $http.get("http://localhost:5000/SpringBootRestApi/api/queixa/" + id).then(function successCallback(response) {
+        RESTService.searchComplaint(id)
+        .then(function successCallback(response) {
             $scope.complaint = response.data;
         }, function errorCallback(error) {
             $scope.complaint = null;
@@ -38,12 +40,12 @@ app.controller("searchComplaintCtrl", function ($scope, $http) {
     }
 });
 
-app.controller("searchHealthUnitCtrl", function ($scope, $http) {
+app.controller("searchHealthUnitCtrl", function ($scope, RESTService) {
 
     $scope.units = [];
 
     $scope.searchHU = function (neighborhood) {
-        $http.get("http://localhost:5000/SpringBootRestApi/api/unidade/busca?bairro=" + neighborhood)
+        RESTService.searchHU(neighborhood)
             .then(function success(response) {
                 $scope.units = [];
                 $scope.units.push(response.data);
@@ -56,12 +58,12 @@ app.controller("searchHealthUnitCtrl", function ($scope, $http) {
     }
 });
 
-app.controller("generalSituationComplaintsCtrl", function ($scope, $http) {
+app.controller("generalSituationComplaintsCtrl", function ($scope, RESTService) {
 
     $scope.situation = "";
 
     var getGeneralSituationComplaints = function (neighborhood) {
-        $http.get("http://localhost:5000/SpringBootRestApi/api/geral/situacao")
+        RESTService.getGeneralSituationComplaints(neighborhood)
             .then(function success(response) {
                 console.log(response.data.obj);
 
