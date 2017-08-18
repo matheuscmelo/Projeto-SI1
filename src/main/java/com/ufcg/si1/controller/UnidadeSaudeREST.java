@@ -50,18 +50,13 @@ public class UnidadeSaudeREST {
 
 	}
 
-	// how to save a subclass object?
 	@RequestMapping(value = "/unidade/", method = RequestMethod.POST)
-	public ResponseEntity<String> incluirUnidadeSaude(
-			@RequestBody UnidadeSaude us/* , UriComponentsBuilder ucBuilder */) {
-
+	public ResponseEntity<String> incluirUnidadeSaude(@RequestBody UnidadeSaude us) {
 		try {
 			unidadeSaudeService.insere(us);
 		} catch (ObjetoJaExistenteException e) {
 			return new ResponseEntity<String>(HttpStatus.CONFLICT);
 		}
-		// HttpHeaders headers = new HttpHeaders();
-		// headers.setLocation(ucBuilder.path("/api/unidade/{id}").buildAndExpand(us.pegaCodigo()).toUri());
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 

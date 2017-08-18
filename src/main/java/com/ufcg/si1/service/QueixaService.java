@@ -22,6 +22,5 @@ public interface QueixaService {
 
 	int numeroQueixasAbertas();
 	
-	// boolean isUserExist(Queixa user);
 
 }
