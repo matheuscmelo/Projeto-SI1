@@ -1,8 +1,7 @@
 package com.ufcg.si1.controller;
 
-import java.util.ArrayList;
+
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -42,7 +41,7 @@ public class UnidadeSaudeREST {
 
 	@RequestMapping(value = "/unidade/", method = RequestMethod.GET)
 	public ResponseEntity<?> getAllUnidades() {
-		Set<UnidadeSaude> unidadesSaude = unidadeSaudeService.getAll();
+		List<UnidadeSaude> unidadesSaude = unidadeSaudeService.getAll();
 		if (unidadesSaude.isEmpty()) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
