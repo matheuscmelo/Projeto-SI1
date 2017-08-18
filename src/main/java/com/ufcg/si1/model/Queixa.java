@@ -72,6 +72,10 @@ public class Queixa {
 	public void setSolicitante(Pessoa solicitante) {
 		this.solicitante = solicitante;
 	}
+	
+	public boolean isAberta() {
+		return this.situacaoQueixa.isAberta();
+	}
 
 	@Override
 	public int hashCode() {

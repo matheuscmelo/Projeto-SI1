@@ -6,6 +6,6 @@ public interface SituacaoQueixa {
 
 	void emAndamento(Queixa queixa) throws ObjetoInvalidoException;
 	void fechar(Queixa queixa, String comentario) throws ObjetoInvalidoException;
-
+	boolean isAberta();
 
 }

@@ -14,8 +14,12 @@ import java.util.List;
 @Service("queixaService")
 public class QueixaServiceImpl implements QueixaService {
 
-	private List<Queixa> queixas = new ArrayList<Queixa>();
-
+	private List<Queixa> queixas;
+	
+	public QueixaServiceImpl() {
+		this.queixas = new ArrayList<Queixa>();
+	}
+	
 	public List<Queixa> findAllQueixas() {
 		return queixas;
 	}
@@ -69,7 +73,7 @@ public class QueixaServiceImpl implements QueixaService {
 	public int numeroQueixasAbertas() {
 		int queixasAbertas = 0;
 		for (Queixa queixa : queixas) {
-			if (queixa.getSituacao() instanceof QueixaAberta)
+			if (queixa.isAberta())
 				queixasAbertas++;
 		}
 

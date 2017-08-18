@@ -15,5 +15,10 @@ public class QueixaFechada implements SituacaoQueixa {
 		throw new ObjetoInvalidoException("Status Inválido");
 
 	}
+	
+	@Override
+	public boolean isAberta() {
+		return false;
+	}
 
 }
