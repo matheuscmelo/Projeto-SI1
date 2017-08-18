@@ -2,15 +2,28 @@ package com.ufcg.si1.model;
 
 import exceptions.ObjetoInvalidoException;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity(name="Queixa")
+@Table(name="tb_queixa")
 public class Queixa {
-	@Autowired
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
+	
+	@Column
 	private String descricao;
+	@Column
 	private Pessoa solicitante;
+	@Column
 	private SituacaoQueixa situacaoQueixa;
+	@Column
 	private String comentario = ""; // usado na atualizacao da queixa
 
 	public Queixa() {
