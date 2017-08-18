@@ -5,44 +5,55 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity(name="UnidadeSaude")
+@Table(name="tb_US")
 public class UnidadeSaude {
-	@JsonProperty(value = "codigo")
-	private long codigo; // gerado no repositorio
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long ID; // gerado no repositorio
+	@Column
 	@JsonProperty(value = "descricao")
 	private String descricao;
+	@Column
 	@JsonProperty(value = "especialidades")
 	private Set<Especialidade> especialidades;
+	@Column
 	@JsonProperty(value = "type")
 	private String tipo;
+	@Column
 	@JsonProperty(value = "numeroPacientesDia")
 	private int numeroPacientesDia;
+	@Column
 	@JsonProperty(value = "numeroMedicos")
 	private int numeroMedicos;
+	@Column
 	@JsonProperty(value = "bairro")
 	private String bairro;
 
-	public UnidadeSaude(String descricao, int numeroPacientesDia, int numeroMedicos, String tipo, String bairro,
-			Set<Especialidade> especialidades) {
+	public UnidadeSaude() {}
+	public UnidadeSaude(String descricao, int numeroPacientesDia, int numeroMedicos, String tipo, String bairro) {
 		this.especialidades = new HashSet<>();
 		this.descricao = descricao;
 		this.numeroMedicos = numeroMedicos;
 		this.numeroPacientesDia = numeroPacientesDia;
 		this.tipo = tipo;
 		this.bairro = bairro;
-		this.especialidades = especialidades;
-	}
-
-	public UnidadeSaude(String descricao, int numeroPacientesDia, int numeroMedicos, String tipo, String bairro) {
-		this(descricao, numeroPacientesDia, numeroMedicos, tipo, bairro, new HashSet<>());
 	}
 
 	public long getCodigo() {
-		return codigo;
+		return ID;
 	}
 
 	public void setCodigo(long codigo) {
-		this.codigo = codigo;
+		this.ID = codigo;
 	}
 
 	public String getDescricao() {
@@ -98,7 +109,7 @@ public class UnidadeSaude {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((bairro == null) ? 0 : bairro.hashCode());
-		result = prime * result + (int) (codigo ^ (codigo >>> 32));
+		result = prime * result + (int) (ID ^ (ID >>> 32));
 		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
 		result = prime * result + ((especialidades == null) ? 0 : especialidades.hashCode());
 		result = prime * result + numeroMedicos;
@@ -121,7 +132,7 @@ public class UnidadeSaude {
 				return false;
 		} else if (!bairro.equals(other.bairro))
 			return false;
-		if (codigo != other.codigo)
+		if (ID != other.ID)
 			return false;
 		if (descricao == null) {
 			if (other.descricao != null)
