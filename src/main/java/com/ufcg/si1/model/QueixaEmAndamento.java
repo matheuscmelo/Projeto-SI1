@@ -1,9 +1,16 @@
 package com.ufcg.si1.model;
 
+
+import javax.persistence.Entity;
+
+import com.fasterxml.jackson.annotation.JsonValue;
+
 import exceptions.ObjetoInvalidoException;
 
-public class QueixaEmAndamento implements SituacaoQueixa {
-
+@Entity
+public class QueixaEmAndamento extends SituacaoQueixa {
+	
+	
 	@Override
 	public void emAndamento(Queixa queixa) throws ObjetoInvalidoException {
 		throw new ObjetoInvalidoException("Status Inválido");
@@ -20,5 +27,11 @@ public class QueixaEmAndamento implements SituacaoQueixa {
 	public boolean isAberta() {
 		return false;
 	}
-
+	
+	@Override
+	@JsonValue
+	public String toString() {
+		return "EM ANDAMENTO";
+	}
+	
 }

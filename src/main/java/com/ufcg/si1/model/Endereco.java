@@ -1,6 +1,17 @@
 package com.ufcg.si1.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity(name="Endereco")
+@Table(name="tb_enderecos")
 public class Endereco {
+	@Id
+	@GeneratedValue(strategy = GenerationType.TABLE)
+	private Long id;
 
 	private String rua;
 

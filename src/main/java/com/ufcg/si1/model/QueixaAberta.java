@@ -1,7 +1,12 @@
 package com.ufcg.si1.model;
 
-public class QueixaAberta implements SituacaoQueixa {
+import javax.persistence.Entity;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
+@Entity
+public class QueixaAberta extends SituacaoQueixa {
+	
 	@Override
 	public void emAndamento(Queixa queixa) {
 		queixa.setSituacao(new QueixaEmAndamento());
@@ -17,5 +22,11 @@ public class QueixaAberta implements SituacaoQueixa {
 	@Override
 	public boolean isAberta() {
 		return true;
+	}
+	
+	@Override
+	@JsonValue
+	public String toString() {
+		return "ABERTA";
 	}
 }

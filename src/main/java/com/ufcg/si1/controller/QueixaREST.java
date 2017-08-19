@@ -1,6 +1,5 @@
 package com.ufcg.si1.controller;
 
-import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -13,9 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ufcg.si1.model.Queixa;
-import com.ufcg.si1.model.QueixaAberta;
 import com.ufcg.si1.model.SituacaoPrefeitura;
-import com.ufcg.si1.model.SituacaoQueixa;
 import com.ufcg.si1.service.QueixaService;
 import com.ufcg.si1.service.QueixaServiceImpl;
 import com.ufcg.si1.util.CustomErrorType;

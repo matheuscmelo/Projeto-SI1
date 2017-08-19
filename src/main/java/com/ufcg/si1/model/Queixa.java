@@ -7,7 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @Entity(name="Queixa")
 @Table(name="tb_queixa")
@@ -19,12 +23,13 @@ public class Queixa {
 	
 	@Column
 	private String descricao;
-	@Column
+	@OneToOne
 	private Pessoa solicitante;
+	@OneToOne
+	@JsonFormat(shape = JsonFormat.Shape.OBJECT)
+	private SituacaoQueixa situacaoQueixa = new QueixaAberta();;
 	@Column
-	private SituacaoQueixa situacaoQueixa;
-	@Column
-	private String comentario = ""; // usado na atualizacao da queixa
+	private String comentario;
 
 	public Queixa() {
 	}

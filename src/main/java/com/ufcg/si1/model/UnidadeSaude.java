@@ -18,13 +18,13 @@ public class UnidadeSaude {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long ID; // gerado no repositorio
+	private long ID;
 	@Column
 	@JsonProperty(value = "descricao")
 	private String descricao;
-	@Column
-	@JsonProperty(value = "especialidades")
-	private Set<Especialidade> especialidades;
+	
+//	@JsonProperty(value = "especialidades")
+//	private Set<Especialidade> especialidades;
 	@Column
 	@JsonProperty(value = "type")
 	private String tipo;
@@ -40,7 +40,7 @@ public class UnidadeSaude {
 
 	public UnidadeSaude() {}
 	public UnidadeSaude(String descricao, int numeroPacientesDia, int numeroMedicos, String tipo, String bairro) {
-		this.especialidades = new HashSet<>();
+//		this.especialidades = new HashSet<>();
 		this.descricao = descricao;
 		this.numeroMedicos = numeroMedicos;
 		this.numeroPacientesDia = numeroPacientesDia;
@@ -88,9 +88,9 @@ public class UnidadeSaude {
 		this.numeroMedicos = numeroMedicos;
 	}
 
-	public boolean adicionarEspecialidade(Especialidade especialidade) {
-		return this.especialidades.add(especialidade);
-	}
+//	public boolean adicionarEspecialidade(Especialidade especialidade) {
+//		return this.especialidades.add(especialidade);
+//	}
 
 	public String getBairro() {
 		return bairro;
@@ -100,9 +100,9 @@ public class UnidadeSaude {
 		this.bairro = bairro;
 	}
 
-	public Object getEspecialidades() {
-		return especialidades;
-	}
+//	public Object getEspecialidades() {
+//		return especialidades;
+//	}
 	
 	@Override
 	public int hashCode() {
@@ -111,7 +111,7 @@ public class UnidadeSaude {
 		result = prime * result + ((bairro == null) ? 0 : bairro.hashCode());
 		result = prime * result + (int) (ID ^ (ID >>> 32));
 		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
-		result = prime * result + ((especialidades == null) ? 0 : especialidades.hashCode());
+//		result = prime * result + ((especialidades == null) ? 0 : especialidades.hashCode());
 		result = prime * result + numeroMedicos;
 		result = prime * result + numeroPacientesDia;
 		result = prime * result + ((tipo == null) ? 0 : tipo.hashCode());
@@ -139,11 +139,12 @@ public class UnidadeSaude {
 				return false;
 		} else if (!descricao.equals(other.descricao))
 			return false;
-		if (especialidades == null) {
-			if (other.especialidades != null)
-				return false;
-		} else if (!especialidades.equals(other.especialidades))
-			return false;
+//		if (especialidades == null) {
+//			if (other.especialidades != null)
+//				return false;
+//		
+//		} else if (!especialidades.equals(other.especialidades))
+//			return false;
 		if (numeroMedicos != other.numeroMedicos)
 			return false;
 		if (numeroPacientesDia != other.numeroPacientesDia)

@@ -28,16 +28,16 @@ public class UnidadeSaudeREST {
 
 	private UnidadeSaudeService unidadeSaudeService = new UnidadeSaudeServiceImpl();
 
-	@RequestMapping(value = "/especialidade/unidades", method = RequestMethod.GET)
-	public ResponseEntity<?> consultaEspecialidadeporUnidadeSaude(@RequestBody int codigoUnidadeSaude) {
-		UnidadeSaude unidade = unidadeSaudeService.procura(codigoUnidadeSaude);
-		if (unidade == null) {
-			return new ResponseEntity<List>(HttpStatus.NOT_FOUND);
-		}
-
-		return new ResponseEntity<>(unidade.getEspecialidades(), HttpStatus.OK);
-
-	}
+//	@RequestMapping(value = "/especialidade/unidades", method = RequestMethod.GET)
+//	public ResponseEntity<?> consultaEspecialidadeporUnidadeSaude(@RequestBody int codigoUnidadeSaude) {
+//		UnidadeSaude unidade = unidadeSaudeService.procura(codigoUnidadeSaude);
+//		if (unidade == null) {
+//			return new ResponseEntity<List>(HttpStatus.NOT_FOUND);
+//		}
+//
+//		return new ResponseEntity<>(unidade.getEspecialidades(), HttpStatus.OK);
+//
+//	}
 
 	@RequestMapping(value = "/unidade/", method = RequestMethod.GET)
 	public ResponseEntity<?> getAllUnidades() {
