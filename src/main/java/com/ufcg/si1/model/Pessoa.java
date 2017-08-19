@@ -1,9 +1,24 @@
 package com.ufcg.si1.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity(name="Pessoa")
+@Table(name="tb_pessoa")
 public class Pessoa {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long ID;
+	@Column
 	private String nome;
+	@Column
 	private String email;
+	@Column
 	private Endereco endereco;
 
 	public Pessoa() {
