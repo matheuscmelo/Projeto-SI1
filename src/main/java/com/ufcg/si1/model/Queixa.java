@@ -11,7 +11,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity(name="Queixa")
 @Table(name="tb_queixa")
@@ -27,12 +27,13 @@ public class Queixa {
 	private Pessoa solicitante;
 	@OneToOne
 	@JsonFormat(shape = JsonFormat.Shape.OBJECT)
+	@JsonIgnore
 	private SituacaoQueixa situacaoQueixa = new QueixaAberta();;
 	@Column
 	private String comentario;
+	
 
-	public Queixa() {
-	}
+	public Queixa() {}
 
 	public Queixa(long id, String descricao, String comentario, String nome, String email, String rua, String uf,
 			String cidade) {
@@ -41,6 +42,10 @@ public class Queixa {
 		this.situacaoQueixa = new QueixaAberta();
 		this.comentario = comentario;
 		this.solicitante = new Pessoa(nome, email, rua, uf, cidade);
+	}
+	
+	public SituacaoQueixa getSituacaoQueixa() {
+		return situacaoQueixa;
 	}
 
 	public long getId() {
@@ -62,7 +67,7 @@ public class Queixa {
 	public SituacaoQueixa getSituacao() {
 		return situacaoQueixa;
 	}
-
+	@JsonIgnore
 	public void setSituacao(SituacaoQueixa situacao) {
 		this.situacaoQueixa = situacao;
 	}

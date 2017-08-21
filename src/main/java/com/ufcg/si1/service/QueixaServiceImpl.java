@@ -1,11 +1,17 @@
 package com.ufcg.si1.service;
 
+import com.ufcg.si1.model.Endereco;
+import com.ufcg.si1.model.Pessoa;
 import com.ufcg.si1.model.Queixa;
 import com.ufcg.si1.model.QueixaAberta;
 import com.ufcg.si1.model.SituacaoQueixa;
+import com.ufcg.si1.repository.PessoaRepository;
+import com.ufcg.si1.repository.QueixaRepository;
+import com.ufcg.si1.repository.SituacaoQueixaRepository;
 
 import exceptions.ObjetoInvalidoException;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -14,65 +20,70 @@ import java.util.List;
 @Service("queixaService")
 public class QueixaServiceImpl implements QueixaService {
 
-	private List<Queixa> queixas;
+	@Autowired
+	private QueixaRepository queixas;
 	
-	public QueixaServiceImpl() {
-		this.queixas = new ArrayList<Queixa>();
-	}
+	@Autowired
+	private SituacaoQueixaRepository situacaoQueixaRepository;
+	
+	@Autowired
+	private PessoaRepository pessoas;
+	
+	@Autowired
+	private EnderecoRepository enderecos;
 	
 	public List<Queixa> findAllQueixas() {
-		return queixas;
+		return queixas.findAll();
 	}
 
 	public void saveQueixa(Queixa queixa) {
-		queixas.add(queixa);
-		queixa.setId(this.size());
+		Pessoa pessoa = queixa.getSolicitante();
+		Endereco endereco = pessoa.getEndereco();
+		
+		enderecos.save(endereco);
+		pessoas.save(pessoa);
+		situacaoQueixaRepository.save(queixa.getSituacaoQueixa());
+		queixas.save(queixa);
 	}
 
-	public void updateQueixa(Queixa queixa) throws ObjetoInvalidoException {
-		if (queixas.contains(queixa)) {
-			this.fecharqueixa(queixa, queixa.getComentario());
-			int index = queixas.indexOf(queixa);
-			queixas.set(index, queixa);
+	public void updateQueixa(Queixa queixa) {
+		queixas.saveAndFlush(queixa);
+	}
+
+	public void fecharQueixa(Long id, String comment) throws ObjetoInvalidoException {
+		Queixa queixa = queixas.findOne(id);
+		if(queixa != null) {
+			queixa.fechar(comment);
+			queixas.save(queixa);
 		}
-	}
-
-	public void fecharqueixa(Queixa queixa, String coment) throws ObjetoInvalidoException {
-		queixa.fechar(coment);
 	}
 
 	public void abrirQueixa(Queixa queixa) {
 		queixa.setSituacao(new QueixaAberta());
-		
+
 	}
 
 	public void deleteQueixaById(long id) {
 		Queixa queixa = findById(id);
-		queixas.remove(queixa);
+		if (queixa != null) {
+			queixas.delete(queixa);
+		}
 	}
 
 	@Override
 	public int size() {
-		return queixas.size();
-	}
-
-	public void deleteAllUsers() {
-		queixas.clear();
+		return queixas.findAll().size();
 	}
 
 	public Queixa findById(long id) {
-		for (Queixa queixa : queixas) {
-			if (queixa.getId() == id) {
-				return queixa;
-			}
-		}
-		return null;
+		return queixas.getOne(id);
 	}
 
 	@Override
 	public int numeroQueixasAbertas() {
+		List<Queixa> allQueixas = queixas.findAll();
 		int queixasAbertas = 0;
-		for (Queixa queixa : queixas) {
+		for (Queixa queixa : allQueixas) {
 			if (queixa.isAberta())
 				queixasAbertas++;
 		}

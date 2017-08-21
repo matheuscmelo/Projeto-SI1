@@ -22,5 +22,7 @@ public interface QueixaService {
 
 	int numeroQueixasAbertas();
 	
+	void fecharQueixa(Long id, String coment) throws ObjetoInvalidoException;
+	
 
 }
