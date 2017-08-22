@@ -61,10 +61,10 @@ public class RestApiControllerTest {
 
 	@Test
 	public void testAdicaoEspecialidade() throws Rep, ObjetoInexistenteException {
-		Especialidade e = new Especialidade("dá muito é o butão", 1);
+		Especialidade e = new Especialidade("dá muito é o butão");
 		this.espRest.incluirEspecialidade(e);
 		assertEquals(this.espRest.consultarEspecialidade(1), new ResponseEntity<Especialidade>(e, HttpStatus.OK));
-		Especialidade e1 = new Especialidade("fazer menes", 2);
+		Especialidade e1 = new Especialidade("fazer menes");
 		this.espRest.incluirEspecialidade(e1);
 		assertEquals(this.espRest.consultarEspecialidade(2), new ResponseEntity<Especialidade>(e1, HttpStatus.OK));
 		Especialidade e2 = new Especialidade("fazer menes");

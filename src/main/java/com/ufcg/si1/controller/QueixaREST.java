@@ -23,16 +23,12 @@ import com.ufcg.si1.util.ObjWrapper;
 
 import exceptions.ObjetoInvalidoException;
 
-@RestController
-@RequestMapping("/api")
-@CrossOrigin
 public class QueixaREST {
 
 	private QueixaService queixaService = new QueixaServiceImpl();
 
 	// situação normal =0 situação extra =1
 
-	private SituacaoPrefeitura situacaoPrefeitura = new SituacaoPrefeitura();
 
 	// -------------------Retrieve All
 	// Complaints---------------------------------------------
@@ -102,13 +98,7 @@ public class QueixaREST {
 		return new ResponseEntity<Queixa>(HttpStatus.NO_CONTENT);
 	}
 
-	@RequestMapping(value = "/geral/situacao", method = RequestMethod.GET)
-	public ResponseEntity<?> getSituacaoGeralQueixas() {
-
-		int situacao = situacaoPrefeitura.calculaEficiencia(queixaService.numeroQueixasAbertas(), queixaService.size());
-
-		return new ResponseEntity<ObjWrapper<Integer>>(new ObjWrapper<Integer>(situacao), HttpStatus.OK);
-	}
+	
 
 	
 	
