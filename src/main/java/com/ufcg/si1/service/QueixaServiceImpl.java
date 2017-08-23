@@ -4,7 +4,7 @@ import com.ufcg.si1.model.Endereco;
 import com.ufcg.si1.model.Pessoa;
 import com.ufcg.si1.model.Queixa;
 import com.ufcg.si1.model.QueixaAberta;
-import com.ufcg.si1.model.SituacaoQueixa;
+import com.ufcg.si1.repository.EnderecoRepository;
 import com.ufcg.si1.repository.PessoaRepository;
 import com.ufcg.si1.repository.QueixaRepository;
 import com.ufcg.si1.repository.SituacaoQueixaRepository;
@@ -14,7 +14,6 @@ import exceptions.ObjetoInvalidoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service("queixaService")

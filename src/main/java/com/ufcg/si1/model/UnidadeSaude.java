@@ -11,7 +11,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity(name = "UnidadeSaude")
@@ -45,7 +44,7 @@ public class UnidadeSaude {
 	}
 
 	public UnidadeSaude(String descricao, int numeroPacientesDia, int numeroMedicos, String tipo, String bairro) {
-		// this.especialidades = new HashSet<>();
+		this.especialidades = new HashSet<>();
 		this.descricao = descricao;
 		this.numeroMedicos = numeroMedicos;
 		this.numeroPacientesDia = numeroPacientesDia;

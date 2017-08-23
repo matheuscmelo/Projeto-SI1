@@ -1,4 +1,4 @@
-package com.ufcg.si1.service;
+package com.ufcg.si1.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

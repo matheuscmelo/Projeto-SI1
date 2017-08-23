@@ -2,7 +2,9 @@ package com.ufcg.si1.controller;
 
 
 import java.util.List;
+import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -15,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ufcg.si1.model.UnidadeSaude;
 import com.ufcg.si1.service.UnidadeSaudeService;
-import com.ufcg.si1.service.UnidadeSaudeServiceImpl;
 import com.ufcg.si1.util.CustomErrorType;
 import com.ufcg.si1.util.ObjWrapper;
 
@@ -25,19 +26,19 @@ import exceptions.ObjetoJaExistenteException;
 @RequestMapping("/api")
 @CrossOrigin
 public class UnidadeSaudeREST {
+	@Autowired
+	private UnidadeSaudeService unidadeSaudeService;
 
-	private UnidadeSaudeService unidadeSaudeService = new UnidadeSaudeServiceImpl();
+	@RequestMapping(value = "/especialidade/unidades", method = RequestMethod.GET)
+	public ResponseEntity<Set> consultaEspecialidadeporUnidadeSaude(@RequestBody int codigoUnidadeSaude) {
+		UnidadeSaude unidade = unidadeSaudeService.procura(codigoUnidadeSaude);
+		if (unidade == null) {
+			return new ResponseEntity<Set>(HttpStatus.NOT_FOUND);
+		}
 
-//	@RequestMapping(value = "/especialidade/unidades", method = RequestMethod.GET)
-//	public ResponseEntity<?> consultaEspecialidadeporUnidadeSaude(@RequestBody int codigoUnidadeSaude) {
-//		UnidadeSaude unidade = unidadeSaudeService.procura(codigoUnidadeSaude);
-//		if (unidade == null) {
-//			return new ResponseEntity<List>(HttpStatus.NOT_FOUND);
-//		}
-//
-//		return new ResponseEntity<>(unidade.getEspecialidades(), HttpStatus.OK);
-//
-//	}
+		return new ResponseEntity<>(unidade.getEspecialidades(), HttpStatus.OK);
+
+	}
 
 	@RequestMapping(value = "/unidade/", method = RequestMethod.GET)
 	public ResponseEntity<?> getAllUnidades() {
@@ -65,8 +66,7 @@ public class UnidadeSaudeREST {
 
 		UnidadeSaude unidade = unidadeSaudeService.procura(id);
 		if (unidade == null) {
-			return new ResponseEntity(new CustomErrorType("Unidade with id " + id + " not found"),
-					HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<>(unidade, HttpStatus.OK);
 	}
