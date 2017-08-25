@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ufcg.si1.model.Queixa;
 import com.ufcg.si1.model.QueixaAberta;
-import com.ufcg.si1.model.SituacaoPrefeitura;
+import com.ufcg.si1.model.Prefeitura;
 import com.ufcg.si1.model.SituacaoQueixa;
 import com.ufcg.si1.service.QueixaService;
 import com.ufcg.si1.service.QueixaServiceImpl;

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ufcg.si1.model.Queixa;
-import com.ufcg.si1.model.SituacaoPrefeitura;
+import com.ufcg.si1.model.Prefeitura;
 import com.ufcg.si1.service.QueixaService;
 import com.ufcg.si1.service.QueixaServiceImpl;
 import com.ufcg.si1.util.ObjWrapper;
@@ -21,7 +21,7 @@ import exceptions.ObjetoInvalidoException;
 @CrossOrigin
 public class PrefeituraREST {
 
-	private SituacaoPrefeitura situacaoPrefeitura = new SituacaoPrefeitura();
+	private Prefeitura situacaoPrefeitura = new Prefeitura();
 	private QueixaService queixaService = new QueixaServiceImpl();
 
 	@RequestMapping(value = "/geral/situacao", method = RequestMethod.GET)
