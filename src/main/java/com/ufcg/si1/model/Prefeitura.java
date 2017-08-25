@@ -1,10 +1,10 @@
 package com.ufcg.si1.model;
 
-public class SituacaoPrefeitura {
+public class Prefeitura {
 	
 	EficienciaTemplate situacaoPrefeitura;
 	
-	public SituacaoPrefeitura() {
+	public Prefeitura() {
 		this.situacaoPrefeitura = new SituacaoNormal();
 	}
 	
