@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ufcg.si1.model.Queixa;
-import com.ufcg.si1.model.SituacaoPrefeitura;
+import com.ufcg.si1.model.Prefeitura;
 import com.ufcg.si1.service.QueixaService;
 import com.ufcg.si1.service.QueixaServiceImpl;
 import com.ufcg.si1.util.CustomErrorType;
@@ -28,7 +28,6 @@ public class QueixaREST {
 	
 	@Autowired
 	private QueixaService queixaService;
-	private SituacaoPrefeitura situacaoPrefeitura = new SituacaoPrefeitura();
 
 
 	@RequestMapping(value = "/queixa/", method = RequestMethod.GET)
@@ -86,13 +85,7 @@ public class QueixaREST {
 		return new ResponseEntity<Queixa>(HttpStatus.NO_CONTENT);
 	}
 
-	@RequestMapping(value = "/geral/situacao", method = RequestMethod.GET)
-	public ResponseEntity<?> getSituacaoGeralQueixas() {
-
-		int situacao = situacaoPrefeitura.calculaEficiencia(queixaService.numeroQueixasAbertas(), queixaService.size());
-
-		return new ResponseEntity<ObjWrapper<Integer>>(new ObjWrapper<Integer>(situacao), HttpStatus.OK);
-	}
+	
 
 	
 	
