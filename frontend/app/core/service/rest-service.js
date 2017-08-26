@@ -18,6 +18,10 @@ app.service("RESTService", function ($http) {
 		return $http.get("http://localhost:5000/SpringBootRestApi/api/unidade/busca?bairro=" + neighborhood);
 	}
 
+	function searchEspeciality(especiality) {     
+		return $http.get("http://localhost:5000/SpringBootRestApi/api/unidade/" + especiality);	// Caminho para as especialidades
+	}
+
 	function getGeneralSituationComplaints() {
 		return $http.get("http://localhost:5000/SpringBootRestApi/api/geral/situacao");
 	}
@@ -27,6 +31,7 @@ app.service("RESTService", function ($http) {
 		searchAveragePerPatient: searchAveragePerPatient,
 		searchComplaint: searchComplaint,
 		searchHU: searchHU,
+		searchEspeciality: searchEspeciality,
 		getGeneralSituationComplaints: getGeneralSituationComplaints,
 	}
 

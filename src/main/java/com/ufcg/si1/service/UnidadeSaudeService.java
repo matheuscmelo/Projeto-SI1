@@ -14,6 +14,8 @@ public interface UnidadeSaudeService {
 	void insere(UnidadeSaude us) throws ObjetoJaExistenteException;
 
 	boolean existe(long codigo);
-
+	
 	UnidadeSaude findByBairro(String bairro);
+	
+	List<UnidadeSaude> findUSByEspecialidade(String descricao);
 }
