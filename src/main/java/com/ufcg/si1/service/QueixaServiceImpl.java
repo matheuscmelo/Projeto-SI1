@@ -37,7 +37,7 @@ public class QueixaServiceImpl implements QueixaService {
 
 	public void saveQueixa(Queixa queixa) {
 		Pessoa pessoa = queixa.getSolicitante();
-		Endereco endereco = pessoa.getEndereco();
+		Endereco endereco = queixa.getEndereco();
 		
 		enderecos.save(endereco);
 		pessoas.save(pessoa);

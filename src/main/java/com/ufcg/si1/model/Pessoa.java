@@ -5,7 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity(name="Pessoa")
@@ -19,24 +18,13 @@ public class Pessoa {
 	private String nome;
 	@Column
 	private String email;
-	@OneToOne
-	private Endereco endereco;
-
+	
 	public Pessoa() {
 	}
 
-	public Pessoa(String nome, String email, String rua, String uf, String cidade) {
+	public Pessoa(String nome, String email) {
 		this.nome = nome;
 		this.email = email;
-		this.endereco = new Endereco(rua, uf, cidade);
-	}
-
-	public Endereco getEndereco() {
-		return endereco;
-	}
-
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
 	}
 
 	public String getNome() {
@@ -55,27 +43,4 @@ public class Pessoa {
 		this.email = email;
 	}
 
-	public String getRua() {
-		return this.endereco.getRua();
-	}
-
-	public String getUf() {
-		return this.endereco.getUf();
-	}
-
-	public String getCidade() {
-		return this.endereco.getCidade();
-	}
-
-	public void setRua(String rua) {
-		this.endereco.setRua(rua);
-	}
-
-	public void setCidade(String cidade) {
-		this.endereco.setCidade(cidade);
-	}
-
-	public void setUf(String uf) {
-		this.endereco.setUf(uf);
-	}
 }

@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity(name="Queixa")
 @Table(name="tb_queixa")
-public class Queixa {
+public abstract class Queixa {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -31,7 +31,8 @@ public class Queixa {
 	private SituacaoQueixa situacaoQueixa = new QueixaAberta();;
 	@Column
 	private String comentario;
-	
+	@OneToOne
+	private Endereco endereco;
 
 	public Queixa() {}
 
@@ -41,13 +42,22 @@ public class Queixa {
 		this.descricao = descricao;
 		this.situacaoQueixa = new QueixaAberta();
 		this.comentario = comentario;
-		this.solicitante = new Pessoa(nome, email, rua, uf, cidade);
+		this.solicitante = new Pessoa(nome, email);
+		this.endereco = new Endereco(rua, uf, cidade);
 	}
 	
 	public SituacaoQueixa getSituacaoQueixa() {
 		return situacaoQueixa;
 	}
 
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
+	
 	public long getId() {
 		return id;
 	}
@@ -94,6 +104,30 @@ public class Queixa {
 
 	public void setSolicitante(Pessoa solicitante) {
 		this.solicitante = solicitante;
+	}
+	
+	public String getRua() {
+		return this.endereco.getRua();
+	}
+
+	public String getUf() {
+		return this.endereco.getUf();
+	}
+
+	public String getCidade() {
+		return this.endereco.getCidade();
+	}
+
+	public void setRua(String rua) {
+		this.endereco.setRua(rua);
+	}
+
+	public void setCidade(String cidade) {
+		this.endereco.setCidade(cidade);
+	}
+
+	public void setUf(String uf) {
+		this.endereco.setUf(uf);
 	}
 	
 	public boolean isAberta() {
