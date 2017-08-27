@@ -19,19 +19,23 @@ app.service("RESTService", function ($http) {
 	}
 
 	function searchComplaint(id) {
-		return $http.get("http://localhost:5000/SpringBootRestApi/api/queixa/" + id);
+		return $http.get(API_PATH + "queixa/" + id);
 	}
 
 	function searchHU(neighborhood) {
-		return $http.get("http://localhost:5000/SpringBootRestApi/api/unidade/busca?bairro=" + neighborhood);
+		return $http.get(API_PATH + "unidade/busca?bairro=" + neighborhood);
 	}
 
 	function searchEspeciality(especiality) {     
-		return $http.get("http://localhost:5000/SpringBootRestApi/api/unidade/" + especiality);	// Caminho para as especialidades
+		return $http.get(API_PATH + "unidade/" + especiality);
 	}
 
 	function getGeneralSituationComplaints() {
-		return $http.get("http://localhost:5000/SpringBootRestApi/api/geral/situacao");
+		return $http.get(API_PATH + "geral/situacao");
+	}
+
+	function logAdmin(adm) {
+		return $http.post(API_PATH + "prefeitura/login", adm)
 	}
 
 	var service = {
@@ -43,6 +47,7 @@ app.service("RESTService", function ($http) {
 		searchHU: searchHU,
 		searchEspeciality: searchEspeciality,
 		getGeneralSituationComplaints: getGeneralSituationComplaints,
+		logAdmin: logAdmin,
 	}
 
 	return service;

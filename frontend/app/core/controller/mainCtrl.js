@@ -81,6 +81,20 @@ app.controller("searchHealthUnitCtrl", function ($scope, RESTService) {
     }
 });
 
+app.controller("loginAdminCtrl", function ($rootScope, $scope, RESTService) {
+    $scope.login = function (adm) {
+        RESTService.logAdmin(adm)
+        .then(function success(response) {
+            $rootScope.isLogged = true;   
+        }, function failed(error) {
+            console.log(error);
+            alert("Usuario ou senha incorretos");
+        });
+        console.log($rootScope.isLogged);
+    }
+
+});
+
 /*
     Metodo parecido com o de consultar a unidade de saude, porem eh passado especialidade ao inves do bairro
 

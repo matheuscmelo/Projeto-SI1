@@ -1,5 +1,6 @@
 package com.ufcg.si1.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -25,7 +26,8 @@ public class PrefeituraREST {
 
 	private Prefeitura situacaoPrefeitura = new Prefeitura();
 	private QueixaService queixaService = new QueixaServiceImpl();
-	private AdministradorService admService = new AdministradorServiceImpl();
+	@Autowired
+	private AdministradorService admService;
 
 	@RequestMapping(value = "/geral/situacao", method = RequestMethod.GET)
 	public ResponseEntity<?> getSituacaoGeralQueixas() {
