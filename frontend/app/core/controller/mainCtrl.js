@@ -61,6 +61,14 @@ app.controller("searchComplaintCtrl", function ($scope, RESTService) {
             console.log(error);
         });
     }
+
+    $scope.setEmAndamento = function(queixa) {
+        RESTService.changeComplaintToEmAndamento(queixa.id);
+    }
+
+    $scope.closeComplaint = function(queixa) {
+        RESTService.closeComplaint(queixa);
+    }
 });
 
 app.controller("searchHealthUnitCtrl", function ($scope, RESTService) {
@@ -92,6 +100,32 @@ app.controller("loginAdminCtrl", function ($rootScope, $scope, RESTService) {
         });
         console.log($rootScope.isLogged);
     }
+
+});
+
+app.controller("adminOptionsCtrl", function ($scope, RESTService) {
+
+    $scope.us = {};
+
+    $scope.changeToNormal = function() {
+        RESTService.changeToNormal();
+    } 
+    $scope.changeToExtra = function() {
+        RESTService.changeToExtra();
+    } 
+    $scope.changeToCaos = function() {
+        RESTService.changeToCaos();
+    }
+
+    $scope.registerUS = function(us) {
+        RESTService.registerUS(us)
+        .then(function success(response) {
+            alert("Unidade de saude cadastrada com sucesso.");
+        }, function failed(error) {
+            alert("Ocorreu um erro :/");
+        });
+    }
+
 
 });
 

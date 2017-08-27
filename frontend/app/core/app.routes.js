@@ -25,8 +25,10 @@ app.config(function ($routeProvider) {
     }).when("/login", {
         templateUrl : "view/adminLogin.html",
         controller : "loginAdminCtrl"
-    }
-    ).otherwise({
+    }).when("/adm",{    
+        templateUrl : "view/admOptions.html",
+        controller : "adminOptionsCtrl"
+    }).otherwise({
         redirectTo: '/'
     });
 

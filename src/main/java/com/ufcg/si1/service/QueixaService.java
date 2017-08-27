@@ -24,5 +24,7 @@ public interface QueixaService {
 	
 	void fecharQueixa(Long id, String coment) throws ObjetoInvalidoException;
 	
+	void setEmAndamento(Long id) throws ObjetoInvalidoException;
+	
 
 }

@@ -59,6 +59,11 @@ public class UnidadeSaudeServiceImpl implements UnidadeSaudeService {
 	
 	@Override
 	public UnidadeSaude findByBairro(String bairro) {
+		for (UnidadeSaude us : unidades.findAll()) {
+			if(us.getBairro().equalsIgnoreCase(bairro.trim())) {
+				return us;
+			}
+		}
 		return null;
 	}
 

@@ -23,7 +23,8 @@
                 <div class="col-lg-12">
                     <h2 class="text-info">{{complaint.descricao}}</h2>
                     <p>Situação: <span class="badge">{{complaint.situacaoQueixa}}</span></p>
-                    
+                    <button ng-if="isLogged && complaint.situacaoQueixa == 'ABERTA'" type="button" ng-click="setEmAndamento(complaint)" class="btn btn-warning">Mudar para EM ANDAMENTO</button>
+                    <section ng-if="isLogged && complaint.situacaoQueixa == 'EM ANDAMENTO'"><input type="text" class="form-control" ng-model="complaint.comentario" placeholder="Comentario"/><button type="button" ng-click="closeComplaint(complaint)" class="btn btn-success">Fechar</button></section>
                     <p>Solicitante</p>
                     <ul class="list-group">
                         <li class="list-group-item"><b>Nome: </b> {{complaint.solicitante.nome}}</li>
@@ -32,7 +33,6 @@
                         <li class="list-group-item"><b>Cidade: </b> {{complaint.endereco.cidade}}</li>
                         <li class="list-group-item"><b>UF: </b> {{complaint.endereco.uf}}</li>
                         <li class="list-group-item"><b>Comentario: </b> {{complaint.comentario}}</li>
-
                     </ul>
                     <hr>
                 </div>

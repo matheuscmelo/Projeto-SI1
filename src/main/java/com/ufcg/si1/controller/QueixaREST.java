@@ -58,9 +58,15 @@ public class QueixaREST {
 	}
 
 	@RequestMapping(value = "/queixa/fechamento/{id}", method = RequestMethod.POST)
-	public ResponseEntity<?> fecharQueixa(@PathVariable("id") long id, @RequestBody Queixa queixaAFechar) throws ObjetoInvalidoException {
-		queixaService.fecharQueixa(id, queixaAFechar.getComentario());;
-		return new ResponseEntity<Queixa>(queixaAFechar, HttpStatus.OK);
+	public ResponseEntity<?> fecharQueixa(@PathVariable("id") long id, @RequestBody String comentario) throws ObjetoInvalidoException {
+		queixaService.fecharQueixa(id, comentario);;
+		return new ResponseEntity<Queixa>(HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/queixa/emAndamento/{id}", method = RequestMethod.PUT)
+	public ResponseEntity<?> queixaEmAndamento(@PathVariable("id") long id) throws ObjetoInvalidoException {
+		queixaService.setEmAndamento(id);
+		return new ResponseEntity<Queixa>(HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/queixa/{id}", method = RequestMethod.GET)

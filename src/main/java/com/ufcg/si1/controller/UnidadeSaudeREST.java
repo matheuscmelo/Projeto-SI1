@@ -52,13 +52,13 @@ public class UnidadeSaudeREST {
 	}
 
 	@RequestMapping(value = "/unidade/", method = RequestMethod.POST)
-	public ResponseEntity<String> incluirUnidadeSaude(@RequestBody UnidadeSaude us) {
+	public ResponseEntity<UnidadeSaude> incluirUnidadeSaude(@RequestBody UnidadeSaude us) {
 		try {
 			unidadeSaudeService.insere(us);
 		} catch (ObjetoJaExistenteException e) {
-			return new ResponseEntity<String>(HttpStatus.CONFLICT);
+			return new ResponseEntity<>(HttpStatus.CONFLICT);
 		}
-		return new ResponseEntity<>(HttpStatus.CREATED);
+		return new ResponseEntity<>(us ,HttpStatus.CREATED);
 	}
 
 	@RequestMapping(value = "/unidade/{id}", method = RequestMethod.GET)

@@ -25,13 +25,13 @@ import com.ufcg.si1.util.ObjWrapper;
 public class PrefeituraREST {
 
 	private Prefeitura situacaoPrefeitura = new Prefeitura();
-	private QueixaService queixaService = new QueixaServiceImpl();
+	@Autowired
+	private QueixaService queixaService;
 	@Autowired
 	private AdministradorService admService;
 
 	@RequestMapping(value = "/geral/situacao", method = RequestMethod.GET)
 	public ResponseEntity<?> getSituacaoGeralQueixas() {
-
 		int situacao = situacaoPrefeitura.calculaEficiencia(queixaService.numeroQueixasAbertas(), queixaService.size());
 
 		return new ResponseEntity<ObjWrapper<Integer>>(new ObjWrapper<Integer>(situacao), HttpStatus.OK);

@@ -1,5 +1,6 @@
 package com.ufcg.si1.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,8 +24,8 @@ import exceptions.Rep;
 @RequestMapping("/api")
 @CrossOrigin
 public class EspecialidadeREST {
-
-	private EspecialidadeService especialidadeService = new EspecialidadeServiceImpl();
+	@Autowired
+	private EspecialidadeService especialidadeService;
 
 
 	@RequestMapping(value = "/especialidade/", method = RequestMethod.POST)

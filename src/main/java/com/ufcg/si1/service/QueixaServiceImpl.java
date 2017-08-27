@@ -39,6 +39,7 @@ public class QueixaServiceImpl implements QueixaService {
 		Pessoa pessoa = queixa.getSolicitante();
 		Endereco endereco = queixa.getEndereco();
 		
+		
 		enderecos.save(endereco);
 		pessoas.save(pessoa);
 		situacaoQueixaRepository.save(queixa.getSituacaoQueixa());
@@ -53,6 +54,7 @@ public class QueixaServiceImpl implements QueixaService {
 		Queixa queixa = queixas.findOne(id);
 		if(queixa != null) {
 			queixa.fechar(comment);
+			situacaoQueixaRepository.save(queixa.getSituacaoQueixa());
 			queixas.save(queixa);
 		}
 	}
@@ -88,6 +90,15 @@ public class QueixaServiceImpl implements QueixaService {
 		}
 
 		return queixasAbertas;
+	}
+
+	@Override
+	public void setEmAndamento(Long id) throws ObjetoInvalidoException {
+		Queixa queixa = queixas.findOne(id);
+		queixa.emAndamento();
+		situacaoQueixaRepository.save(queixa.getSituacaoQueixa());
+		queixas.save(queixa);
+		System.out.println(queixa.getSituacaoQueixa());
 	}
 
 }
