@@ -18,4 +18,6 @@ public interface UnidadeSaudeService {
 	UnidadeSaude findByBairro(String bairro);
 	
 	List<UnidadeSaude> findUSByEspecialidade(String descricao);
+
+	List<UnidadeSaude> getUnidadesPorEspecialidade(String especialidade);
 }

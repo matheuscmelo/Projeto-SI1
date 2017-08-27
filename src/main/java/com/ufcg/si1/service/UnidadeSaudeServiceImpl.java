@@ -67,5 +67,17 @@ public class UnidadeSaudeServiceImpl implements UnidadeSaudeService {
 		return null;
 	}
 
+	@Override
+	public List<UnidadeSaude> getUnidadesPorEspecialidade(String especialidade) {
+		List<UnidadeSaude> usList = new ArrayList<>();
+		for (UnidadeSaude us : unidades.findAll()) {
+			if (us.hasEspecialidade(especialidade)) {
+				usList.add(us);
+			}
+		}
+		return usList;
+		
+	}
+
 
 }

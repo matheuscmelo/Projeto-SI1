@@ -39,6 +39,15 @@ public class UnidadeSaudeREST {
 		return new ResponseEntity<>(unidade.getEspecialidades(), HttpStatus.OK);
 
 	}
+	
+
+	@RequestMapping(value = "unidade/especialidade/{especialidade}", method = RequestMethod.GET)
+	public ResponseEntity<List> getUnidadesPorEspecialidade(@PathVariable String especialidade) {
+		
+		List<UnidadeSaude> usList = unidadeSaudeService.getUnidadesPorEspecialidade(especialidade);
+		return new ResponseEntity<>(usList, HttpStatus.OK);
+
+	}
 
 	@RequestMapping(value = "/unidade/", method = RequestMethod.GET)
 	public ResponseEntity<?> getAllUnidades() {
@@ -93,7 +102,7 @@ public class UnidadeSaudeREST {
 		if (unidade == null || !unidade.getBairro().equals(bairro)) {
 			return new ResponseEntity(new CustomErrorType("Unidade with bairro " + bairro + " not found"),
 					HttpStatus.NOT_FOUND);
-		}
+		} 
 
 		return new ResponseEntity<UnidadeSaude>(unidade, HttpStatus.OK);
 	}

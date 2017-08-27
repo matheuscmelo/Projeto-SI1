@@ -107,6 +107,10 @@ public class UnidadeSaude {
 	public Set<String> getEspecialidades() {
 		return especialidades;
 	}
+	
+	public boolean hasEspecialidade(String especialidade) {
+		return this.especialidades.contains(especialidade.trim());
+	}
 
 	@Override
 	public int hashCode() {
