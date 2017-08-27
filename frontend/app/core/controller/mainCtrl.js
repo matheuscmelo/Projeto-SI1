@@ -58,6 +58,29 @@ app.controller("searchHealthUnitCtrl", function ($scope, RESTService) {
     }
 });
 
+/*
+    Metodo parecido com o de consultar a unidade de saude, porem eh passado especialidade ao inves do bairro
+
+    Nao sei se esta certo
+*/
+app.controller("searchEspecialityCtrl", function ($scope, RESTService) {
+
+    $scope.units = [];
+
+    $scope.searchEspeciality = function (especiality) {
+        // RESTService.searchEspeciality(especiality)
+        //     .then(function success(response) {
+        //         $scope.units = [];
+        //         $scope.units.push(response.data);
+        //         console.log("Foram encontradas Unidades de saúde");
+        //         console.log(response.data);
+        //     }, function failed(error) {
+        //         console.log("Erro na busca de unidades");
+        //         console.log(error.data.errorMessage);
+        //     });
+    }
+});
+
 app.controller("generalSituationComplaintsCtrl", function ($scope, RESTService) {
 
     $scope.situation = "";

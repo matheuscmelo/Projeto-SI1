@@ -1,5 +1,6 @@
 package com.ufcg.si1.service;
 
+import com.ufcg.si1.model.Especialidade;
 import com.ufcg.si1.model.UnidadeSaude;
 import com.ufcg.si1.repository.USRepository;
 
@@ -8,6 +9,7 @@ import exceptions.ObjetoJaExistenteException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service("unidadeSaudeService")
@@ -25,7 +27,7 @@ public class UnidadeSaudeServiceImpl implements UnidadeSaudeService {
 	public List<UnidadeSaude> getAll() {
 		return unidades.findAll();
 	}
-
+	
 	@Override
 	public void insere(UnidadeSaude us) throws ObjetoJaExistenteException {
 		unidades.save(us);
@@ -36,7 +38,25 @@ public class UnidadeSaudeServiceImpl implements UnidadeSaudeService {
 		UnidadeSaude us = unidades.getOne(codigo);
 		return us != null;
 	}
-
+	
+	/*
+	 * Metodo para pegar todas unidades de saude que possuem a mesma especialidade(descricao)
+	 */
+	@Override
+	public List<UnidadeSaude> findUSByEspecialidade(String descricao) {
+		List<UnidadeSaude> unidades =  this.unidades.findAll();
+		List<UnidadeSaude> unidadesPorEspecialidade = new ArrayList<>();
+		for (UnidadeSaude us : unidades) {
+			for (String esp : us.getEspecialidades()) {
+				if (esp.equals(descricao)) {
+					unidadesPorEspecialidade.add(us);
+				}
+			}
+		}
+		
+		return unidadesPorEspecialidade;
+	}
+	
 	@Override
 	public UnidadeSaude findByBairro(String bairro) {
 		return null;

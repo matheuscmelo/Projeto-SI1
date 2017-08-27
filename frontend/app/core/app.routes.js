@@ -10,6 +10,9 @@ app.config(function ($routeProvider) {
     }).when("/search_health_unit", {
         templateUrl: "view/searchHealthUnit.html",
         controller : "searchHealthUnitCtrl",
+    }).when("/searchespeciality", {                     // Criado o caminho para consultar especialidade
+        templateUrl: "view/searchEspeciality.html",     //
+        controller : "searchEspecialityCtrl",
     }).when("/searchaverage",{
         templateUrl : "view/search_average_per_patient.html",
         controller: "searchAverangeCtrl"
