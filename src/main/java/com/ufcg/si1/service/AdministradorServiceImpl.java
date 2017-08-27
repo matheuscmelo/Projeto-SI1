@@ -26,28 +26,30 @@ public class AdministradorServiceImpl implements AdministradorService {
 	}
 
 	@Override
-	public boolean checarEmail(String email) {
+	public Administrador findByEmail(String email) {
 		for (Administrador adm : adms.findAll()) {
 			if (adm.getEmail().equals(email)) {
-				return true;
+				return adm;
 			}
 		}
-		return false;
+		return null;
 	}
 
 	@Override
 	public boolean validarAdm(Administrador adm) {
-		boolean resultado = false;
-		for (Administrador admin : adms.findAll()) {
-			if (admin.getSenha().equals(adm.getSenha())) {
-				resultado = true;
-			}
+		Administrador adm2 = findByEmail(adm.getEmail());
+		if (adm2 != null) {
+			return adm2.getSenha().equals(adm.getSenha());
 		}
-		return resultado && this.checarEmail(adm.getEmail());
+		return false;
 	}
 
-
-	public Administrador procurarPorId(long id) {
+	public Administrador findById(long id) {
 		return adms.getOne(id);
+	}
+
+	@Override
+	public boolean contains(Administrador adm) {
+		return findByEmail(adm.getEmail()) != null;
 	}
 }

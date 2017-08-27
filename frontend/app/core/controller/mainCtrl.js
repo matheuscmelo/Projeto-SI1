@@ -1,7 +1,29 @@
 app.controller("registerComplaintCtrl", function ($scope, toastr, $location, RESTService) {
 
-    $scope.registerComplaint = function (complaint) {
-        RESTService.registerComplaint(complaint)
+    $scope.registerFoodComplaint = function (complaint) {
+        RESTService.registerFoodComplaint(complaint)
+            .then(function success(response) {
+                toastr.success("Queixa adicionada com sucesso!");
+                $location.path('/createdcomplaint/' + response.data.id);
+            }, function error(error) {
+                console.log(error);
+                console.log("Problemas ao tentar adicionar queixa.");
+            });
+    }
+
+    $scope.registerAnimalComplaint = function (complaint) {
+        RESTService.registerAnimalComplaint(complaint)
+            .then(function success(response) {
+                toastr.success("Queixa adicionada com sucesso!");
+                $location.path('/createdcomplaint/' + response.data.id);
+            }, function error(error) {
+                console.log(error);
+                console.log("Problemas ao tentar adicionar queixa.");
+            });
+    }
+
+    $scope.registerGeneralComplaint = function (complaint) {
+        RESTService.registerGeneralComplaint(complaint)
             .then(function success(response) {
                 toastr.success("Queixa adicionada com sucesso!");
                 $location.path('/createdcomplaint/' + response.data.id);
@@ -33,6 +55,7 @@ app.controller("searchComplaintCtrl", function ($scope, RESTService) {
         RESTService.searchComplaint(id)
         .then(function successCallback(response) {
             $scope.complaint = response.data;
+            console.log(response.data);
         }, function errorCallback(error) {
             $scope.complaint = null;
             console.log(error);

@@ -1,8 +1,16 @@
 package com.ufcg.si1.model;
 
-public class QueixaServico extends Queixa{
+import javax.persistence.Column;
+import javax.persistence.Entity;
 
+@Entity(name="QueixaServico")
+public class QueixaServico extends Queixa{
+	@Column
 	private String reclamacao;
+	
+	public QueixaServico() {
+		super();
+	}
 	
 	public QueixaServico(long id, String descricao, String comentario, String nome, String email, String rua,
 			String uf, String cidade, String reclamacao) {

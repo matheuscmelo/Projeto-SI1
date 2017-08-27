@@ -1,16 +1,23 @@
 package com.ufcg.si1.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity(name="Admininstrador")
+@Table(name="tb_adm")
 public class Administrador {
 	
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long ID;
+	@Column
 	private String email;
+	@Column
 	private String senha;
 
 	public Administrador() {

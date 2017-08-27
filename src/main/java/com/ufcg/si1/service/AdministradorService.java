@@ -8,9 +8,11 @@ public interface AdministradorService {
 
 	void removerAdm(Administrador adm);
 
-	boolean checarEmail(String email);
+	Administrador findByEmail(String email);
 
 	boolean validarAdm(Administrador adm);
 
-	Administrador procurarPorId(long id);
+	Administrador findById(long id);
+	
+	boolean contains(Administrador adm);
 }

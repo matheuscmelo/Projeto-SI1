@@ -2,8 +2,16 @@ app.service("RESTService", function ($http) {
 
 	var API_PATH = 'http://localhost:5000/SpringBootRestApi/api/';
 
-	function registerComplaint(complaint) {
-		return $http.post(API_PATH + "queixa/", JSON.stringify(complaint));
+	function registerFoodComplaint(complaint) {
+		return $http.post(API_PATH + "queixa/alimentar/", JSON.stringify(complaint));
+	}
+
+	function registerAnimalComplaint(complaint) {
+		return $http.post(API_PATH + "queixa/animal/", JSON.stringify(complaint));
+	}
+
+	function registerGeneralComplaint(complaint) {
+		return $http.post(API_PATH + "queixa/geral/", JSON.stringify(complaint));
 	}
 
 	function searchAveragePerPatient(id) {
@@ -27,7 +35,9 @@ app.service("RESTService", function ($http) {
 	}
 
 	var service = {
-		registerComplaint: registerComplaint,
+		registerFoodComplaint: registerFoodComplaint,
+		registerGeneralComplaint: registerGeneralComplaint,
+		registerAnimalComplaint: registerAnimalComplaint,
 		searchAveragePerPatient: searchAveragePerPatient,
 		searchComplaint: searchComplaint,
 		searchHU: searchHU,

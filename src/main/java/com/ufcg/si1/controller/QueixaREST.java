@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ufcg.si1.model.Queixa;
+import com.ufcg.si1.model.QueixaAlimentar;
+import com.ufcg.si1.model.QueixaAnimal;
+import com.ufcg.si1.model.QueixaServico;
 import com.ufcg.si1.model.Prefeitura;
 import com.ufcg.si1.service.QueixaService;
 import com.ufcg.si1.service.QueixaServiceImpl;
@@ -36,8 +39,20 @@ public class QueixaREST {
 		return new ResponseEntity<List<Queixa>>(queixas, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/queixa/", method = RequestMethod.POST)
-	public ResponseEntity<Queixa> abrirQueixa(@RequestBody Queixa queixa) {
+	@RequestMapping(value = "/queixa/alimentar", method = RequestMethod.POST)
+	public ResponseEntity<Queixa> abrirQueixaAlimentar(@RequestBody QueixaAlimentar queixa) {
+		queixaService.saveQueixa(queixa);
+		return new ResponseEntity<Queixa>(queixa, HttpStatus.CREATED);
+	}
+	
+	@RequestMapping(value = "/queixa/animal", method = RequestMethod.POST)
+	public ResponseEntity<Queixa> abrirQueixaAnimal(@RequestBody QueixaAnimal queixa) {
+		queixaService.saveQueixa(queixa);
+		return new ResponseEntity<Queixa>(queixa, HttpStatus.CREATED);
+	}
+	
+	@RequestMapping(value = "/queixa/geral", method = RequestMethod.POST)
+	public ResponseEntity<Queixa> abrirQueixaGeral(@RequestBody QueixaServico queixa) {
 		queixaService.saveQueixa(queixa);
 		return new ResponseEntity<Queixa>(queixa, HttpStatus.CREATED);
 	}

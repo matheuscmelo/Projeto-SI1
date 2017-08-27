@@ -13,7 +13,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-@Entity(name="Queixa")
+@Entity
 @Table(name="tb_queixa")
 public abstract class Queixa {
 	
